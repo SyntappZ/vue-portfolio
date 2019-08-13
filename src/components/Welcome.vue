@@ -24,7 +24,9 @@ export default {
   created() {},
   methods: {
     scrollDown() {
-
+        this.$store.dispatch("gravity");
+        const element =  document.querySelector('.welcome-text')
+        element.classList.add('animated', 'hinge')
     }
   }
 };
@@ -49,6 +51,7 @@ export default {
 }
 .welcome-text {
   height: 500px;
+  animation-delay: .5s;
 }
 
 h1 {
@@ -74,6 +77,7 @@ h3 {
   width:140px;
   transition: .2s ease-in-out;
   cursor: pointer;
+  border-radius: 3px;
 }
 i{
   transition: .2s;

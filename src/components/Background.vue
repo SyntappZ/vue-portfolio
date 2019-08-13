@@ -8,6 +8,7 @@
 
 <script>
 import welcome from "@/components/Welcome";
+import { mapState } from 'vuex';
 export default {
   name: "background",
   components: {
@@ -18,26 +19,32 @@ export default {
       canvas: null,
       context: null,
       fullAmount: 400,
-      mobileAmount: 200
+      mobileAmount: 200,
+      gravity: 0,
+      friction: 0,
+     
     };
   },
   mounted() {
-    let canvas = this.canvas,
-      c = this.context;
-    canvas = this.$refs.canvas;
+    let vm = this;
+    let canvas = vm.canvas,
+      c = vm.context;
+    canvas = vm.$refs.canvas;
 
-    canvas.width = window.innerWidth -17;
-    canvas.height = window.innerHeight -3;
+    canvas.width = window.innerWidth - 17;
+    canvas.height = window.innerHeight - 5;
     c = canvas.getContext("2d");
 
     window.addEventListener("resize", function() {
-      canvas.width = window.innerWidth -17;
-      canvas.height = window.innerHeight -3;
+      canvas.width = window.innerWidth - 17;
+      canvas.height = window.innerHeight - 5;
       init();
     });
 
-    let gravity = 0;
-    let friction = 0;
+    if (vm.gravityOn) {
+      vm.gravity = 1;
+      vm.friction = 0.5;
+    }
 
     function Circle(x, y, dx, dy, radius) {
       this.x = x;
@@ -65,16 +72,16 @@ export default {
           this.dx = -this.dx;
         }
         if (this.y + this.radius > innerHeight || this.y - this.radius < 0) {
-          if (friction != 0) {
-            this.dy = -this.dy * friction;
+          if (vm.friction != 0) {
+            this.dy = -this.dy * vm.friction;
           } else {
             this.dy = -this.dy;
           }
         } else {
-          gravity === 1 ? (this.dy += gravity) : null;
+          vm.gravity === 1 ? (this.dy += vm.gravity) : null;
         }
 
-        if (friction === 0) {
+        if (vm.friction === 0) {
           this.x += this.dx;
         }
 
@@ -88,9 +95,9 @@ export default {
 
     function init(dx, dy) {
       let amount = 40;
-        if(window.innerWidth < 600){
+      if (window.innerWidth < 600) {
         amount = 20;
-    }
+      }
 
       circleArray = [];
       for (let i = 0; i < amount; i++) {
@@ -115,7 +122,23 @@ export default {
 
     init();
     animate();
-  }
+  },
+ 
+    computed: mapState(['gravityOn']),
+  
+   watch: {
+    gravityOn(newValue, oldValue) {
+     
+      if(newValue == true) {
+        this.gravity = 1;
+      this.friction = 0.5;
+      setTimeout(() => {
+         document.querySelector('.background').style.height = 0;
+      }, 1500);
+     
+      }
+    }
+   }
 };
 </script>
 
@@ -128,7 +151,6 @@ export default {
   left: 0;
   top: 0;
   background: linear-gradient(0deg, #015169, #003849);
-   
+  overflow: hidden;
 }
-
 </style>
