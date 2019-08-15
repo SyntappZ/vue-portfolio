@@ -1,6 +1,6 @@
 <template>
   <div class="projects">
-  <h1>projects</h1>
+
   </div>
 </template>
 
@@ -18,9 +18,11 @@ export default {
 
 <style scoped>
   .projects {
-    height:100vh;
-    
-  
+    min-height:100vh;
+    padding: 80px;
+    box-sizing: border-box;
+     background: linear-gradient(0deg, #015169, #003849);
+    color: #00b7a1;
     
   }
   h1 {

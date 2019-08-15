@@ -123,6 +123,9 @@ export default {
     init();
     animate();
   },
+  created() {
+    
+  },
  
     computed: mapState(['gravityOn']),
   
@@ -133,7 +136,7 @@ export default {
         this.gravity = 1;
       this.friction = 0.5;
       setTimeout(() => {
-         document.querySelector('.background').style.height = 0;
+         this.$store.dispatch("pageScroll", 1);
       }, 1500);
      
       }

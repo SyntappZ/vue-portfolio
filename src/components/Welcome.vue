@@ -1,6 +1,6 @@
 <template>
   <div class="welcome">
-    <div class="welcome-text">
+    <div v-if="onWelcome" class="welcome-text">
       <h1 class="animated bounceIn">SYNTAPPZ</h1>
       <h2 class="animated fadeInDown ">welcome to my portfolio</h2>
 
@@ -19,9 +19,21 @@ export default {
   name: "welcome",
   components: {},
   data() {
-    return {};
+    return {
+      onWelcome: true
+    };
   },
-  created() {},
+  created() {
+       window.addEventListener('scroll', () => {
+      
+        if(scrollY < 800) {
+         this.onWelcome = true;
+        }else{
+          this.onWelcome = false;
+        }
+    
+      })
+  },
   methods: {
     scrollDown() {
         this.$store.dispatch("gravity");
@@ -36,13 +48,11 @@ export default {
 <style scoped>
 .welcome {
   font-family: "Audiowide", cursive;
-
   position: absolute;
   left: 0;
   top: 0;
   height: 100vh;
   width: 100%;
-  /* color:#00B7A1; */
   color: #fff;
   letter-spacing: 2px;
   display: flex;
@@ -68,32 +78,18 @@ h3 {
   font-family: "Roboto Mono", monospace;
   font-weight: 100;
 }
-.btn {
-  margin: 100px auto;
-  font-family: "Roboto Mono", monospace;
-  padding: 15px;
-  animation-delay: .5s;
-  border:solid 2px #fff; 
-  width:140px;
-  transition: .2s ease-in-out;
-  cursor: pointer;
-  border-radius: 3px;
-}
+
 i{
   transition: .2s;
   padding-left:5px;
+}
+.btn:hover i {
+  transform: rotate(90deg)
 }
 .btn:hover {
   background-color:#fff;
   color:rgb(5, 107, 133);
   box-shadow: 0 0 5px #fff;
-}
-.btn:hover i {
-  transform: rotate(90deg)
-}
-.btn p {
-  margin: 0;
-  padding: 0;
 }
 
 @media (max-width: 600px) {

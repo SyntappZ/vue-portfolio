@@ -1,8 +1,30 @@
 <template>
   <div id="app">
+    <navbar />
     <router-view />
   </div>
 </template>
+
+<script>
+import navbar from './components/Navbar'
+export default {
+  components: {
+    navbar
+  },
+  data() {
+    return {
+      
+    }
+  },
+  created() {
+     
+     
+  },
+  computed: {
+    
+  }
+}
+</script>
 
 <style>
 html,
@@ -19,5 +41,23 @@ body {
   text-align: center;
   color: #2c3e50;
   margin: 0;
+}
+
+.btn {
+  margin: 100px auto;
+  font-family: "Roboto Mono", monospace;
+  padding: 15px;
+  animation-delay: .5s;
+  border:solid 2px #fff; 
+  width:140px;
+  transition: .2s ease-in-out;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+
+.btn p {
+  margin: 0;
+  padding: 0;
 }
 </style>

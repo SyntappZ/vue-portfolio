@@ -6,12 +6,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    gravityOn: false
+    gravityOn: false,
+    page: 0
   },
   mutations: {
   changeGravity(state, gravity) {
     state.gravityOn = gravity
-    
+  },
+  choosePage(state, page) {
+    state.page = page
   }
    
   },
@@ -19,9 +22,10 @@ export default new Vuex.Store({
     gravity({ commit }) {
       commit('changeGravity', true)
      },
+     pageScroll({ commit }, page) {
+      commit('choosePage', page)
+     }
   },
-  getters: {
-    gravityOn: state => state.gravityOn,
-  },
+ 
   
 });
