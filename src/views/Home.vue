@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="homePage">
     
     <background class="home" />
     <about class="about"/>
@@ -24,18 +24,28 @@ export default {
   },
   data() {
     return {
-
+    
     }
+  },
+  mounted() {
+  let aboutPage = document.querySelector('.about')
+  
+ 
   },
   methods: {
     scroll(page) {
        jump(page, {
          duration: 700
        })
-    }
+    },
+
    
   },
-    computed: mapState(['page']),
+    computed: {
+       ...mapState(['page']),
+
+     
+    },
   
    watch: {
     page(newValue, oldValue) {
@@ -51,7 +61,8 @@ export default {
      
       }
      
-    }
+    },
+  
    }
 };
 </script>

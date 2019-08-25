@@ -26,12 +26,17 @@ export default {
       this.$store.dispatch("pageScroll", page);
     }
   },
-  created() {
-    let nav, links,
+  mounted() {
+   
+  setTimeout(() => {
+     let nav, links,
      glow;
-    window.addEventListener("scroll", () => {
-      
-      if (scrollY > 780) {
+     let aboutPage = this.$store.state.aboutPageHeight
+     let projectsPage = this.$store.state.projectsPageHeight
+  //console.log(projectsPage)
+      window.addEventListener("scroll", () => {
+     // console.log(scrollY)
+      if (scrollY >= aboutPage) {
         this.notHome = true;
         nav = document.querySelector(".navbar");
         links = document.querySelectorAll('.link')
@@ -41,14 +46,14 @@ export default {
         this.notHome = false;
       }
 
-      if (scrollY > 720 && scrollY <= 1550) {
+      if (scrollY >= aboutPage && scrollY < projectsPage) {
         this.about = "thick";
         this.projects = "";
         nav.style.background = '#fff'
         nav.style.color = '#003849'
         links.forEach(x => x.style.color = '#003849')
       }
-      if (scrollY > 1550) {
+      if (scrollY >= projectsPage) {
         this.about = "";
         this.projects = "thick";
         nav.style.background = '#003849'
@@ -58,6 +63,9 @@ export default {
       
       }
     });
+  }, 100);
+    
+   
   }
 };
 </script>

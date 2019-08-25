@@ -7,7 +7,10 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     gravityOn: false,
-    page: 0
+    page: 0,
+    aboutPageHeight: '',
+    projectsPageHeight: ''
+
   },
   mutations: {
   changeGravity(state, gravity) {
@@ -15,7 +18,13 @@ export default new Vuex.Store({
   },
   choosePage(state, page) {
     state.page = page
-  }
+  },
+  aboutPage(state, height) {
+    state.aboutPageHeight = height
+  },
+  projectsPage(state, height) {
+    state.projectsPageHeight = height
+  },
    
   },
   actions: {
@@ -24,7 +33,15 @@ export default new Vuex.Store({
      },
      pageScroll({ commit }, page) {
       commit('choosePage', page)
-     }
+     },
+     aboutPageHeight({ commit }, height) {
+      commit('aboutPage', height)
+     },
+     projectsPageHeight({ commit }, height) {
+      commit('projectsPage', height)
+    },
+   
+
   },
  
   
