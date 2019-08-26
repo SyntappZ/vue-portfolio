@@ -91,7 +91,11 @@ i{
   color:rgb(5, 107, 133);
   box-shadow: 0 0 5px #fff;
 }
-
+@media (max-width: 1024px) {
+  .welcome {
+    align-items: center;
+  }
+}
 @media (max-width: 600px) {
 
 h1 {

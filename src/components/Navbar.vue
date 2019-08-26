@@ -27,45 +27,41 @@ export default {
     }
   },
   mounted() {
-   
-  setTimeout(() => {
-     let nav, links,
-     glow;
-     let aboutPage = this.$store.state.aboutPageHeight
-     let projectsPage = this.$store.state.projectsPageHeight
-  //console.log(projectsPage)
+    setTimeout(() => {
+      let nav, links, glow;
+      let aboutPage = this.$store.state.aboutPageHeight;
+      let projectsPage = this.$store.state.projectsPageHeight;
+     
+      
       window.addEventListener("scroll", () => {
-     // console.log(scrollY)
-      if (scrollY >= aboutPage) {
-        this.notHome = true;
-        nav = document.querySelector(".navbar");
-        links = document.querySelectorAll('.link')
-        
-      
-      } else {
-        this.notHome = false;
-      }
-
-      if (scrollY >= aboutPage && scrollY < projectsPage) {
-        this.about = "thick";
-        this.projects = "";
-        nav.style.background = '#fff'
-        nav.style.color = '#003849'
-        links.forEach(x => x.style.color = '#003849')
-      }
-      if (scrollY >= projectsPage) {
-        this.about = "";
-        this.projects = "thick";
-        nav.style.background = '#003849'
-        nav.style.color = '#fff'
        
-        links.forEach(x => x.style.color = '#fff')
-      
-      }
-    });
-  }, 100);
-    
-   
+        if (scrollY >= aboutPage) {
+          this.notHome = true;
+          nav = document.querySelector(".navbar");
+          links = document.querySelectorAll(".link");
+          projectsPage = this.$store.state.projectsPageHeight;
+        } else {
+          this.notHome = false;
+        }
+
+        if (scrollY >= aboutPage && scrollY < projectsPage) {
+          this.about = "thick";
+          this.projects = "";
+          nav.style.background = "#fff";
+          nav.style.color = "#003849";
+          links.forEach(x => (x.style.color = "#003849"));
+          projectsPage = this.$store.state.projectsPageHeight;
+        }
+        if (scrollY >= projectsPage) {
+          this.about = "";
+          this.projects = "thick";
+          nav.style.background = "#003849";
+          nav.style.color = "#fff";
+
+          links.forEach(x => (x.style.color = "#fff"));
+        }
+      });
+    }, 100);
   }
 };
 </script>
@@ -73,7 +69,7 @@ export default {
 
 <style scoped>
 .navbar {
-  height: 60px;
+  min-height: 60px;
   position: fixed;
   z-index: 10;
   background: rgb(255, 255, 255);
@@ -82,9 +78,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-wrap: wrap;
-  transition: .3s ease-in-out;
- 
+  flex-wrap: wrap-reverse;
+  transition: 0.3s ease-in-out;
 }
 .wrap {
   display: flex;
@@ -93,20 +88,26 @@ export default {
 .link {
   color: #003849;
   text-decoration: none;
-  padding:0 20px;
+  padding: 0 20px;
   letter-spacing: 2px;
   cursor: pointer;
 }
 
 .thick {
   font-weight: 900;
-
 }
-
 
 h3 {
   font-family: "Audiowide", cursive;
   letter-spacing: 2px;
-  
+}
+@media (max-width: 600px) {
+  .wrap {
+    direction: row-reverse;
+  }
+  .link {
+    padding: 0 5px;
+    letter-spacing: 2px;
+  }
 }
 </style>

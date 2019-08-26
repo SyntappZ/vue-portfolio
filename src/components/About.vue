@@ -47,7 +47,7 @@ export default {
     return {
       onAbout: false,
       model: false,
-      pageTop: null,
+      pageTop: 0,
       icons: [
         {
           icon: "fas fa-mobile-alt",
@@ -77,25 +77,24 @@ export default {
     };
   },
   mounted() {
-       this.pageTop = document.querySelector('.about').offsetTop
- 
-    this.$store.dispatch('aboutPageHeight', this.pageTop)
-    
+    this.pageTop = document.querySelector(".about").offsetTop;
+    this.$store.dispatch("aboutPageHeight", this.pageTop);
+
     window.addEventListener("scroll", () => {
-     // console.log(scrollY)
-     
       if (scrollY >= this.pageTop) {
         this.onAbout = true;
         setTimeout(() => {
-          this.$refs.line.style.width = 350 + "px";
+          if (window.innerWidth < 600) {
+            this.$refs.line.style.width = 100 + "%";
+          } else {
+            this.$refs.line.style.width = 350 + "px";
+          }
         }, 200);
       }
     });
-   
   },
-  created() {
-  
-  },
+  created() {},
+
   methods: {
     openModel() {
       this.model = true;
@@ -141,7 +140,7 @@ export default {
 }
 
 .model {
-  width: 40%;
+  width: 50%;
   height: 300px;
   background-color: #fff;
   position: absolute;
@@ -195,7 +194,6 @@ export default {
 .box {
   width: 80%;
   border-radius: 5px;
-
   display: flex;
   justify-content: space-around;
   align-content: space-around;
@@ -264,5 +262,13 @@ h3 {
 .icon-wrap i {
   font-size: 40px;
   color: #fff;
+}
+@media (max-width: 1024px) {
+  .model {
+    width: 100%;
+    height: auto;
+    border: none;
+    top: 1px;
+  }
 }
 </style>
