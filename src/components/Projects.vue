@@ -13,7 +13,9 @@
 
             <div class="animated">
                <p>{{ project.subtext }}</p>
-            <div class="more-btn">
+            <div class="more-btn"
+            @click="sendProjectData(project.id, project.type)"
+            >
               view more
               <i class="fas fa-arrow-right"></i>
             </div>
@@ -37,40 +39,50 @@ export default {
        onProjects: false,
       projects: [
         {
-          id: 1,
+          id: 0,
+          type: 'web',
           title: 'world of information',
           subtext: 'Vue - Wiki/Imgur API',
-          img: 'woi-home.png',
+          img: 'woi/woi-home.png',
           delay: 'delay1'
         },
       
           {
-          id: 2,
+          id: 1,
+          type: 'web',
           title: 'angels & demons',
           subtext: 'Vue - Wiki API',
-          img: 'a&d-main.png',
+          img: 'a-n-d/a&d-main.png',
           delay: 'delay2'
         },
             {
-          id: 3,
+          id: 2,
+          type: 'web',
           title: 'the vault',
           subtext: 'Vue/Vuetify - Firebase',
-          img: 'vault-notes.png',
+          img: 'vault/vault-home.png',
           delay: 'delay3'
         },
           {
+          id: 3,
+          type: 'android',
+          title: 'memester',
+          subtext: 'cordova/framwork7',
+          img: 'memester/memester-main.jpg',
+          delay: 'delay4'
+        },
+          {
           id: 4,
+          type: 'android',
           title: 'fusion ninja',
           subtext: 'cordova/framwork7',
-          img: 'fusion.png',
-          delay: 'delay4'
+          img: 'fusion/fusion-main.png',
+          delay: 'delay5'
         }
       ]
     };
   },
   mounted() {
-   
-
     let pageTop = document.querySelector(".projects").offsetTop;
     this.$store.dispatch("projectsPageHeight", pageTop);
     let aboutPage = this.$store.state.aboutPageHeight;
@@ -84,7 +96,13 @@ export default {
       }
     });
   },
-  methods: {},
+  methods: {
+    sendProjectData(id, type) {
+      let proData = [id, type]
+      this.$store.dispatch("projectData", proData);
+      this.$router.push('/project')
+    }
+  },
   computed: {}
 };
 </script>
@@ -172,6 +190,9 @@ img {
 }
 .delay4 {
   animation-delay: 1s;
+}
+.delay5 {
+  animation-delay: 1.2s;
 }
 @media (min-height: 800px) {
   .project-wrap {

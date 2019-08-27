@@ -18,7 +18,8 @@ export default {
       notHome: false,
       about: "",
       projects: "",
-      contact: ""
+      contact: "",
+      pageOn: this.$route.name,
     };
   },
   methods: {
@@ -27,6 +28,7 @@ export default {
     }
   },
   mounted() {
+    
     setTimeout(() => {
       let nav, links, glow;
       let aboutPage = this.$store.state.aboutPageHeight;
@@ -62,6 +64,11 @@ export default {
         }
       });
     }, 100);
+  },
+  watch: {
+    pageOn(newVal, oldVal) {
+      console.log(newVal)
+    }
   }
 };
 </script>

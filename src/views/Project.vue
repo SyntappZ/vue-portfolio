@@ -1,43 +1,75 @@
 <template>
-  <div class="background">
-    <canvas ref="canvas"></canvas>
-    <welcome />
+  <div class="project">
+    <h1 class="name">syntappz</h1>
+    <div class="bg">
+       <canvas ref="canvas"></canvas>
+    </div>
+    <div class="top-flex">
+      <div class="img-wrap">
+        <img :src="mainImage">
+      </div>
+      <h2 class="title">{{ title }}</h2>
+    </div>
+    <div class="bottom-flex">
+
+    </div>
+    
   </div>
 </template>
 
-
 <script>
-import welcome from "@/components/Welcome";
-import { mapState } from 'vuex';
+
 export default {
-  name: "background",
-  components: {
-    welcome
-  },
+ 
   data() {
     return {
+      type: '',
+      title: '',
+      about: '',
+      making: '',
+      features: [],
+      techUsed: [],
+      link: '',
+      github: '',
+      mainImage: '',
+      images: [],
       canvas: null,
       context: null,
       fullAmount: 400,
       mobileAmount: 200,
       gravity: 0,
       friction: 0,
-     
+
+
     };
   },
   mounted() {
-    let vm = this;
+    let pageData = this.$store.state.projectInfo
+    this.type = pageData.type;
+    this.title = pageData.title;
+    this.about = pageData.about;
+    this.making = pageData.making;
+    this.features = pageData.features;
+    this.techUsed = pageData.techUsed;
+    this.link = pageData.link;
+    this.github = pageData.github;
+    this.mainImage = pageData.mainImage;
+    this.images = pageData.images;
+
+  let bgHeight = document.querySelector('.bg').offsetHeight;
+
+       let vm = this;
     let canvas = vm.canvas,
       c = vm.context;
     canvas = vm.$refs.canvas;
 
     canvas.width = window.innerWidth - 17;
-    canvas.height = window.innerHeight - 5;
+    canvas.height = bgHeight;
     c = canvas.getContext("2d");
 
     window.addEventListener("resize", function() {
       canvas.width = window.innerWidth - 17;
-      canvas.height = window.innerHeight - 5;
+      canvas.height = bgHeight;
       init();
     });
 
@@ -53,11 +85,11 @@ export default {
       this.dy = dy;
       this.radius = radius;
 
-      this.color = "#eee";
+      this.color = "#00b7a1";
 
       this.draw = function() {
         c.beginPath();
-        c.shadowColor = "#fff";
+        c.shadowColor = "#00b7a1";
 
         c.shadowBlur = 18;
         c.shadowOffsetX = 0;
@@ -94,9 +126,9 @@ export default {
     let circleArray = [];
 
     function init(dx, dy) {
-      let amount = 40;
+      let amount = 60;
       if (window.innerWidth < 600) {
-        amount = 20;
+        amount = 40;
       }
 
       circleArray = [];
@@ -123,37 +155,65 @@ export default {
     init();
     animate();
   },
-  created() {
-    
-  },
- 
-    computed: mapState(['gravityOn']),
-  
-   watch: {
-    gravityOn(newValue, oldValue) {
-     
-      if(newValue == true) {
-        this.gravity = 1;
-      this.friction = 0.5;
-      setTimeout(() => {
-         this.$store.dispatch("pageScroll", 1);
-      }, 1500);
-     
-      }
-    }
-   }
+  methods: {},
+  computed: {}
 };
 </script>
 
-
 <style scoped>
-.background {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  left: 0;
-  top: 0;
-  background: linear-gradient(0deg, #015169, #003849);
-  overflow: hidden;
-}
+ .project {
+   width:90%;
+   margin:auto;
+  
+ }
+ .name {
+    color: #fff;
+    font-family: "Audiowide", cursive;
+    font-weight: 100;
+    font-size:20px;
+    margin-top: 20px;
+    text-shadow: 0 0 5px #fff;
+    
+ }
+  .bg {
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:60vh;
+    background:#003849;
+    z-index: -1;
+  }
+  .top-flex {
+    width:100%;
+    /* border:solid 1px black; */
+    height:500px;
+    margin-top: 100px;
+    display:flex;
+    justify-content:space-evenly;
+    align-items: center;
+  }
+  .bottom-flex {
+     width:100%;
+    /* border:solid 1px black; */
+    height:500px;
+     display:flex;
+    justify-content:space-between;
+    
+  }
+  .img-wrap {
+    width:60%;
+    border:white solid 3px;
+  }
+  .img-wrap img {
+    width:100%;
+  }
+  .title {
+    color:white;
+    font-family: "Audiowide", cursive;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    
+  }
+  
 </style>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 
+
 Vue.use(Router)
 
 export default new Router({
@@ -13,6 +14,20 @@ export default new Router({
       name: 'home',
       component: Home
     },
+    {
+      path: '/Project',
+      name: 'project',
+     
+      component: () => import('./views/Project.vue')
+    },
    
-  ]
+  ],
+  scrollBehavior (to, from, savedPosition) {
+    if(savedPosition) {
+      return savedPosition;
+
+    }else{
+      return {x: 0, y: 0}
+    }
+  }
 })
