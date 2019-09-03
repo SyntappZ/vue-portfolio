@@ -271,4 +271,14 @@ h3 {
     top: 1px;
   }
 }
+@media (min-height: 800px) {
+ .btn {
+    margin: 100px auto;
+    
+ }
+ .box {
+   margin: 200px auto 0 auto;
+ }
+  
+}
 </style>

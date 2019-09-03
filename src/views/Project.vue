@@ -11,7 +11,24 @@
       <h2 class="title">{{ title }}</h2>
     </div>
     <div class="bottom-flex">
+      <div class="left-box">
+        <div class="img-box">
+          <div class="img" v-for="(img, i) in images" :key="i">
+             <img :src="img">
+          </div>
+          
 
+        </div>
+        <div class="making"></div>
+        <div class="lists">
+          <div class="features"></div>
+          <div class="tech"></div>
+        </div>
+      </div>
+      <div class="right-box">
+        <div class="about"></div>
+        <div class="links"></div>
+      </div>
     </div>
     
   </div>
@@ -39,12 +56,12 @@ export default {
       mobileAmount: 200,
       gravity: 0,
       friction: 0,
-
+      
 
     };
   },
   mounted() {
-    let pageData = this.$store.state.projectInfo
+     let pageData = this.$store.state.projectInfo
     this.type = pageData.type;
     this.title = pageData.title;
     this.about = pageData.about;
@@ -196,17 +213,20 @@ export default {
   .bottom-flex {
      width:100%;
     /* border:solid 1px black; */
-    height:500px;
-     display:flex;
+    height:700px;
+    display:flex;
     justify-content:space-between;
+    
     
   }
   .img-wrap {
     width:60%;
-    border:white solid 3px;
+    
+   
   }
   .img-wrap img {
     width:100%;
+    box-shadow: 1px 3px 16px #333;
   }
   .title {
     color:white;
@@ -215,5 +235,61 @@ export default {
     letter-spacing: 2px;
     
   }
+  .left-box {
+    width:70%;
+    height: 100%;
+    
+  }
+  .right-box {
+    width:30%;
+    height: 100%;
+    
+  }
+  .img-box {
+    width:100%;
+    height:40%;
+    display:flex;
+    justify-content: space-around;
+  }
+  .img {
+    width:45%;
+    height:200px;
+    box-shadow: 1px 1px 10px #333;
+    transition: .4s ease;
+    cursor: zoom-in;
+  }
+  /* .img:hover {
+    transform: scale(3);
+    box-shadow: 5px 5px 100px #333;
+  } */
+  .img img {
+    width:100%;
+    object-fit: cover;
+    height:200px;
+  }
+  .about {
+    width:100%;
+    height:60%;
+    
+  }
+  .links {
+    width:100%;
+    height:40%;
+    
+  }
+  @media (min-height: 800px) {
+    .bottom-flex {
+   margin-top: 100px;
+    
+    
+  }
+ .img {
+   height: 300px;
+ }
+ .img img {
+   height: 300px;
+ }
+  
+}
   
 </style>

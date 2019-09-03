@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { stat } from "fs";
+
 
 Vue.use(Vuex);
 
@@ -10,7 +10,12 @@ export default new Vuex.Store({
     page: 0,
     aboutPageHeight: "",
     projectsPageHeight: "",
-    projectInfo: []
+    projectInfo: sessionStorage.getItem('info')
+    ? JSON.parse(sessionStorage.getItem('info'))
+    : []
+
+   
+ 
   },
   mutations: {
     changeGravity(state, gravity) {
@@ -145,7 +150,7 @@ export default new Vuex.Store({
         {
           type: type,
           title: "memester",
-          about: "an meme search and share app for android, this has better functionality then the meme-apk\
+          about: "a meme search and share app for android, this has better functionality then the meme-apk\
           with lazyLoad images with masonary layout and has related tags images too and pressing the tag will load more images of that tag name.",
           making:
             "Originaly i wanted to make this app download the images to the mobile but i just cant find good way of doing this at the moment, \
@@ -169,11 +174,15 @@ export default new Vuex.Store({
             'axios',
             'imgur API'
           ],
-          link: '#',
+          link: 'https://play.google.com/store/apps/details?id=syntappz.memester.fm7&gl=GB',
           github: 'https://github.com/SyntappZ/memester',
           mainImage: 'memester/memester-main.jpg',
           images: [
-            
+            'memester/home.png',
+            'memester/search.png',
+            'memester/menu.png',
+            'memester/image.png',
+            'memester/tags.png',
           ]
         },
 
@@ -216,8 +225,10 @@ export default new Vuex.Store({
 
 
       ];
-
+     
       state.projectInfo = projects[id]
+     sessionStorage.setItem("info", JSON.stringify(projects[id]));
+      
     }
   },
   actions: {

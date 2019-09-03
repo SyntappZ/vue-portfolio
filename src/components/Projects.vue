@@ -67,7 +67,7 @@ export default {
           id: 3,
           type: 'android',
           title: 'memester',
-          subtext: 'cordova/framwork7',
+          subtext: 'cordova/framework7',
           img: 'memester/memester-main.jpg',
           delay: 'delay4'
         },
@@ -75,7 +75,7 @@ export default {
           id: 4,
           type: 'android',
           title: 'fusion ninja',
-          subtext: 'cordova/framwork7',
+          subtext: 'cordova/framework7',
           img: 'fusion/fusion-main.png',
           delay: 'delay5'
         }

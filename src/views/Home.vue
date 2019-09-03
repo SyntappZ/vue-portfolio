@@ -1,6 +1,6 @@
 <template>
   <div class="homePage">
-    
+     <navbar />
     <background class="home" />
     <about class="about"/>
     <projects class="projects" />
@@ -12,6 +12,7 @@
 import about from "@/components/About";
 import projects from "@/components/Projects";
 import background from "@/components/Background";
+import navbar from "@/components/Navbar";
 import { mapState } from 'vuex';
 import jump from "jump.js";
 
@@ -20,7 +21,9 @@ export default {
   components: {
     background,
     projects,
-    about
+    about,
+    navbar,
+    
   },
   data() {
     return {
