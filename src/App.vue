@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <router-view />
+    <pageFooter />
   </div>
 </template>
 
 <script>
-
+import pageFooter from './components/pageFooter'
 export default {
   components: {
-   
+   pageFooter
   },
   data() {
     return {
