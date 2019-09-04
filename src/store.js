@@ -169,7 +169,7 @@ export default new Vuex.Store({
             'html/css',
             'javascript',
             'vue/vuex',
-            'framwork7',
+            'framework7',
             'cordova',
             'axios',
             'imgur API'
