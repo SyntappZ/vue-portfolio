@@ -1,5 +1,5 @@
 <template>
-  <div class="projects" >
+  <div class="projects" name="projects">
     <h1 v-if="onProjects" class="animated flipInX">{{ title }}</h1>
     <div class="project-wrap" v-if="onProjects">
       <div class="project"  v-for="project in projects" :key="project.id">

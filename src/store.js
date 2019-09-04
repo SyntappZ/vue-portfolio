@@ -38,7 +38,7 @@ export default new Vuex.Store({
         {
           type: type,
           title: "world of information",
-          about: "welcome to the woi this is wiki snippet search application.",
+          about: "woi is wiki snippet search application.",
           making:
             "I learnt a good bit about using apis and axios making this project,\
              i had to make quite a few changes to the page from my original plan,\
@@ -113,7 +113,7 @@ export default new Vuex.Store({
         {
           type: type,
           title: "The vault",
-          about: "welcome to the vault a password manager made with vue and vuetify it can store passwords or notes, you can add,\
+          about: "the vault is a password manager made with vue and vuetify it can store passwords or notes, you can add,\
            delete, edit and favorite passwords and notes, the password manager has a strength indicator and a generator so you can always\
             have a stong password stored you can filter between strengths or favorites, the notes has a word counter and a favorites filter too.",
           making:
@@ -150,8 +150,8 @@ export default new Vuex.Store({
         {
           type: type,
           title: "memester",
-          about: "a meme search and share app for android, this has better functionality then the meme-apk\
-          with lazyLoad images with masonary layout and has related tags images too and pressing the tag will load more images of that tag name.",
+          about: "memester is a meme search and share app for android, this has better functionality then the meme-apk\
+          with lazyLoad images with masonary layout and has related tags images too and pressing the tag will load more images of that tag name and save images to favorites.",
           making:
             "Originaly i wanted to make this app download the images to the mobile but i just cant find good way of doing this at the moment, \
             i finally got download working by drawing the images to a canvas then downloading the canvas but this only works in browser and not apk\
@@ -190,7 +190,7 @@ export default new Vuex.Store({
         {
           type: type,
           title: "fusion ninja",
-          about: "an android app for searching user created tracks in a game called trials fusion.",
+          about: "fusion ninjs is an android app for searching user created tracks in a game called trials fusion.",
           making:
             "i made this app for a game called trials fusion, it allows people to search for other peoples ninja tracks so they can play them, \
             there is already a website that does this called https://fusion.ninja-central.com but its not very responsive on mobile and makes it hard to use,\
