@@ -2,13 +2,15 @@
   <div class="welcome">
     <div v-if="onWelcome" class="welcome-text">
       <h1 class="animated bounceIn">SYNTAPPZ</h1>
-      <h2 class="animated fadeInDown ">welcome to my portfolio</h2>
+      <h2 class="animated fadeInDown">welcome to my portfolio</h2>
 
-      <h3 class="animated 	bounceInRight">Web Developer</h3>
+      <h3 class="animated bounceInRight">Web Developer</h3>
 
-      <div @click="scrollDown" class="btn animated 	bounceInLeft">
-        <p>About Me <i class="fas fa-arrow-right"></i></p>
-      
+      <div @click="scrollDown" class="btn animated bounceInLeft">
+        <p>
+          About Me
+          <i class="fas fa-arrow-right"></i>
+        </p>
       </div>
     </div>
   </div>
@@ -23,22 +25,27 @@ export default {
       onWelcome: true
     };
   },
-  created() {
-       window.addEventListener('scroll', () => {
-      
-        if(scrollY < 800) {
-         this.onWelcome = true;
-        }else{
-          this.onWelcome = false;
-        }
-    
-      })
+  mounted() {
+    window.addEventListener("scroll", this.scrollListener);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollListener);
   },
   methods: {
     scrollDown() {
-        this.$store.dispatch("gravity");
-        const element =  document.querySelector('.welcome-text')
-        element.classList.add('animated', 'hinge')
+      this.$store.dispatch("gravity");
+      const element = document.querySelector(".welcome-text");
+      element.classList.add("animated", "hinge");
+        setTimeout(() => {
+         this.$store.dispatch("pageScroll", 1);
+      }, 1500);
+    },
+    scrollListener() {
+      if (scrollY < 800) {
+        this.onWelcome = true;
+      } else {
+        this.onWelcome = false;
+      }
     }
   }
 };
@@ -61,7 +68,7 @@ export default {
 }
 .welcome-text {
   height: 500px;
-  animation-delay: .5s;
+  animation-delay: 0.5s;
 }
 
 h1 {
@@ -74,21 +81,21 @@ h2 {
 }
 
 h3 {
-  animation-delay: .5s;
+  animation-delay: 0.5s;
   font-family: "Roboto Mono", monospace;
   font-weight: 100;
 }
 
-i{
-  transition: .2s;
-  padding-left:5px;
+i {
+  transition: 0.2s;
+  padding-left: 5px;
 }
 .btn:hover i {
-  transform: rotate(90deg)
+  transform: rotate(90deg);
 }
 .btn:hover {
-  background-color:#fff;
-  color:rgb(5, 107, 133);
+  background-color: #fff;
+  color: rgb(5, 107, 133);
   box-shadow: 0 0 5px #fff;
 }
 @media (max-width: 1024px) {
@@ -97,14 +104,12 @@ i{
   }
 }
 @media (max-width: 600px) {
-
-h1 {
-  font-size: 45px;
-  
-}
-h2 {
-  font-size: 16px;
-  padding:20px 0 50px 0;
-}
+  h1 {
+    font-size: 45px;
+  }
+  h2 {
+    font-size: 16px;
+    padding: 20px 0 50px 0;
+  }
 }
 </style>

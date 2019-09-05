@@ -1,6 +1,6 @@
 <template>
   <div class="pageFooter">
-      <div class="wrap">
+      <div class="wrap" :class="pageOn">
         <div class="icon-wrap">
           <div class="icon">
             <a href="https://github.com/SyntappZ" target="_blank">
@@ -33,14 +33,28 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 export default {
+  
   name: "pageFooter",
 
   data() {
-    return {};
+    return {
+      pageOn: 'homePage'
+    };
   },
-  methods: {}
+  methods: {},
+   watch: {
+    currentPageOn(page) {
+      if(page) {
+         this.pageOn = page;
+      }
+     
+    }
+  },
+  computed: {
+      ...mapState(['currentPageOn']),
+  }
 };
 </script>
 
@@ -50,6 +64,10 @@ export default {
   width: 100%;
   background-color: #003849;
   letter-spacing: 1px;
+ 
+}
+.homePage {
+   border-top: solid #00b7a1 1px;
   
 }
 .auth {
@@ -58,7 +76,7 @@ export default {
   width: 100%;
   padding:5px 0;
   text-align: center;
-  color:#fff;
+  color:#000;
   background: #00b7a1;
 }
 .wrap {
@@ -69,7 +87,7 @@ export default {
 }
 .icon-wrap {
   display: flex;
-  width: 450px;
+  width: 500px;
   justify-content: space-around;
 }
 .icon {
@@ -111,6 +129,11 @@ export default {
   .link {
     padding: 0 20px;
   }
+}
+@media (min-height: 800px) {
+ .icon-wrap {
+   width:700px;
+ }
 }
 
 </style>

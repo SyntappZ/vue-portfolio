@@ -3,11 +3,11 @@
     <h1 v-if="onProjects" class="animated flipInX">{{ title }}</h1>
     <div class="project-wrap" v-if="onProjects">
       <div class="project"  v-for="project in projects" :key="project.id">
-        <div class="img-wrap animated bounceInLeft" :class="project.delay">
+        <div class="img-wrap animated fadeInLeft" :class="project.delay">
            <img :src="project.img" alt="woi" />
         </div>
        
-        <div class="info animated bounceInRight" :class="project.delay">
+        <div class="info animated fadeInRight" :class="project.delay">
           <div class="text-wrap">
             <h2 class="title">{{ project.title }}</h2>
 
@@ -36,6 +36,7 @@ export default {
     return {
       title: "Projects",
       hoverOn: false,
+      pageTop: 0,
        onProjects: false,
       projects: [
         {
@@ -83,24 +84,32 @@ export default {
     };
   },
   mounted() {
-    let pageTop = document.querySelector(".projects").offsetTop;
-    this.$store.dispatch("projectsPageHeight", pageTop);
-    let aboutPage = this.$store.state.aboutPageHeight;
-    window.addEventListener("scroll", () => {
-      if (scrollY >= aboutPage) {
-        pageTop = document.querySelector(".projects").offsetTop;
-        this.$store.dispatch("projectsPageHeight", pageTop);
-      }
-      if(scrollY >= pageTop) {
-        this.onProjects = true;
-      }
-    });
+   this.pageTop = document.querySelector(".projects").offsetTop;
+   this.$store.dispatch("projectsPageHeight", this.pageTop);
+    window.addEventListener("scroll", this.scrollListener)
+   
+  },
+   beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollListener)
   },
   methods: {
     sendProjectData(id, type) {
       let proData = [id, type]
       this.$store.dispatch("projectData", proData);
       this.$router.push('/project')
+    },
+    scrollListener() {
+       
+        let aboutPage = this.$store.state.aboutPageHeight;
+         
+      if (scrollY >= aboutPage) {
+       this.pageTop = document.querySelector(".projects").offsetTop;
+        this.$store.dispatch("projectsPageHeight", this.pageTop);
+      }
+      if(scrollY >= this.pageTop) {
+        this.onProjects = true;
+      }
+    
     }
   },
   computed: {}
@@ -113,7 +122,7 @@ export default {
   min-height: 100vh;
   padding: 80px 0;
   box-sizing: border-box;
-  background: linear-gradient(0deg, #015169, #003849);
+  background: #003849;
   color: #333;
 }
 .project-wrap {

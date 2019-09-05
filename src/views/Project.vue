@@ -1,63 +1,72 @@
 <template>
-  <div class="project">
-    <div class="backBtn" @click="backToProjects">
-      <i class="fas fa-arrow-circle-left"></i>
-    </div>
-    <h1 class="name">syntappz</h1>
-    <div class="bg">
-      <canvas ref="canvas"></canvas>
-    </div>
-    <div class="top-flex">
-      <div class="main-img-wrap">
-        <img :src="mainImage" />
+  <div>
+    <div class="project">
+      <div class="backBtn animated fadeInLeft" @click="backToProjects">
+        <i class="fas fa-arrow-circle-left"></i>
       </div>
-      <h2 class="title">{{ title }}</h2>
-    </div>
-
-    <div class="bottom-flex">
-      <div class="left-box">
-        <div v-if="type == 'android'" class="android-img-box">
-          <div class="android-img" v-for="(img, i) in images" :key="i">
-            <img :src="img" />
-          </div>
+      <h1 class="name animated fadeInDown">syntappz</h1>
+      <div class="bg">
+        <canvas ref="canvas"></canvas>
+      </div>
+      <div class="top-flex">
+        <div class="main-img-wrap animated jackInTheBox">
+          <img :src="mainImage" />
         </div>
-        <div v-else class="img-box">
-          <div class="img" v-for="(img, i) in images" :key="i">
-            <img :src="img" />
-          </div>
-        </div>
-
-        <div class="about">
-          <h2>What is {{ title }}</h2>
-          <P>{{ about }}</P>
-        </div>
-
-        <div class="making">
-          <h2>Making this project</h2>
-          <p>{{ making }}</p>
-        </div>
-        <div class="links-wrap">
-          <h2 class="linkTitle">Website & Github</h2>
-          <div class="links">
-          <a :href="github" target="_blank"><div class="btn">github</div></a>  
-           <a :href="link" target="_blank"><div class="btn">site</div></a> 
-          </div>
-        </div>
+        <h2 class="title animated fadeInRight">{{ title }}</h2>
       </div>
 
-      <div class="right-box">
-        <div class="features">
-          <h2>Features</h2>
-          <ul v-for="(feature, i) in features" :key="i">
-            <li>{{ feature }}</li>
-          </ul>
+      <div class="bottom-flex">
+        <div class="left-box animated fadeInLeft">
+          <div v-if="type == 'android'" class="android-img-box">
+            <div class="android-img" v-for="(img, i) in images" :key="i">
+              <img :src="img" />
+            </div>
+          </div>
+          <div v-else class="img-box">
+            <div class="img" v-for="(img, i) in images" :key="i">
+              <img :src="img" />
+            </div>
+          </div>
+
+          <div class="about">
+            <h2>What is {{ title }}</h2>
+            <P>{{ about }}</P>
+            <p>
+              <b>{{ testing }}</b>
+            </p>
+          </div>
+
+          <div class="making">
+            <h2>Making this project</h2>
+            <p>{{ making }}</p>
+          </div>
+          <div class="links-wrap">
+            <h2 class="linkTitle">Website & Github</h2>
+            <div class="links">
+              <a :href="link" target="_blank">
+                <div class="btn">site</div>
+              </a>
+              <a :href="github" target="_blank">
+                <div class="btn">github</div>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <div class="tech">
-          <h2>Technology</h2>
-          <ul v-for="(tech, i) in techUsed" :key="i">
-            <li>{{ tech }}</li>
-          </ul>
+        <div class="right-box animated fadeInRight">
+          <div class="features">
+            <h2>Features</h2>
+            <ul v-for="(feature, i) in features" :key="i">
+              <li>{{ feature }}</li>
+            </ul>
+          </div>
+
+          <div class="tech">
+            <h2>Technology</h2>
+            <ul v-for="(tech, i) in techUsed" :key="i">
+              <li>{{ tech }}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +74,12 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+// import links from '@/components/Links'
 export default {
+  components: {
+    // links
+  },
   data() {
     return {
       type: "",
@@ -83,10 +97,13 @@ export default {
       fullAmount: 400,
       mobileAmount: 200,
       gravity: 0,
-      friction: 0
+      friction: 0,
+      testing: null,
+     
     };
   },
   mounted() {
+    this.$store.dispatch("pageChanged", "project");
     let pageData = this.$store.state.projectInfo;
     this.type = pageData.type;
     this.title = pageData.title;
@@ -98,6 +115,7 @@ export default {
     this.github = pageData.github;
     this.mainImage = pageData.mainImage;
     this.images = pageData.images;
+    this.testing = pageData.testing;
 
     let bgHeight = document.querySelector(".bg").offsetHeight;
 
@@ -203,7 +221,10 @@ export default {
       this.$router.go(-1);
     }
   },
-  computed: {}
+  computed: {
+    ...mapState(["currentPageOn"])
+  },
+ 
 };
 </script>
 
@@ -256,6 +277,7 @@ a {
 
 .main-img-wrap {
   width: 850px;
+  animation-delay: 0.4s;
 }
 .main-img-wrap img {
   width: 100%;
@@ -267,6 +289,9 @@ a {
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+/* .title, .name, .backBtn {
+  animation-delay: .6s;
+} */
 
 .img-box {
   width: 100%;
@@ -330,21 +355,20 @@ a {
   text-transform: capitalize;
 }
 .linkTitle {
-  
   text-align: left;
 }
 .links-wrap {
-  width:100%;
-  display:flex;
-  justify-content: space-between;
-  align-items:center;
-  margin:50px auto;
-}
-.links {
-  width:500px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  
+  align-items: center;
+  margin: 50px auto;
+}
+.links {
+  width: 500px;
+  display: flex;
+  justify-content: space-between;
+
   text-transform: capitalize;
 }
 
@@ -352,10 +376,10 @@ a {
   background: #00b7a1;
   color: white;
   margin: 0;
-  height:52px;
-  padding:0;
+  height: 52px;
+  padding: 0;
   line-height: 52px;
-  width:170px;
+  width: 170px;
 }
 .about {
   margin-bottom: 50px;
@@ -371,6 +395,9 @@ a {
   .bottom-flex {
     margin-top: 100px;
     align-content: space-around;
+  }
+  .links {
+    width: 700px;
   }
   .img {
     height: 300px;

@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <div v-if="model" class="model animated lightSpeedIn">
+    <div v-if="model" class="model animated fadeInDown">
       <div @click="closeModel" class="close">
         <i class="fas fa-times"></i>
       </div>
@@ -77,10 +77,23 @@ export default {
     };
   },
   mounted() {
-    this.pageTop = document.querySelector(".about").offsetTop;
+   this.pageTop = document.querySelector(".about").offsetTop;
     this.$store.dispatch("aboutPageHeight", this.pageTop);
+    window.addEventListener("scroll", this.scrollListener)
+   
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollListener)
+  },
+  
 
-    window.addEventListener("scroll", () => {
+  methods: {
+    openModel() {
+      this.model = true;
+    },
+    scrollListener() {
+       
+      
       if (scrollY >= this.pageTop) {
         this.onAbout = true;
         setTimeout(() => {
@@ -91,21 +104,15 @@ export default {
           }
         }, 200);
       }
-    });
-  },
-  created() {},
-
-  methods: {
-    openModel() {
-      this.model = true;
+   
     },
     closeModel() {
       const close = document.querySelector(".model");
-      close.classList.remove("lightSpeedIn");
-      close.classList.add("animated", "fadeOut");
+      close.classList.remove("fadeInDown");
+      close.classList.add("animated", "fadeOutUp");
       setTimeout(() => {
-        close.classList.remove("fadeOut");
-        close.classList.add("animated", "lightSpeedIn");
+        close.classList.remove("fadeOutUp");
+        close.classList.add("animated", "fadeInDown");
         this.model = false;
       }, 500);
     }
@@ -277,7 +284,10 @@ h3 {
     
  }
  .box {
-   margin: 200px auto 0 auto;
+   margin: 150px auto 0 auto;
+ }
+ .wrap {
+   margin-top:100px;
  }
   
 }

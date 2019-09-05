@@ -8,7 +8,7 @@
 
 <script>
 import welcome from "@/components/Welcome";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 export default {
   name: "background",
   components: {
@@ -21,8 +21,7 @@ export default {
       fullAmount: 400,
       mobileAmount: 200,
       gravity: 0,
-      friction: 0,
-     
+      friction: 0
     };
   },
   mounted() {
@@ -123,25 +122,18 @@ export default {
     init();
     animate();
   },
-  created() {
-    
-  },
  
-    computed: mapState(['gravityOn']),
-  
-   watch: {
-    gravityOn(newValue, oldValue) {
-     
-      if(newValue == true) {
+
+  computed: mapState(["gravityOn"]),
+
+  watch: {
+    gravityOn(newValue) {
+      if (newValue) {
         this.gravity = 1;
-      this.friction = 0.5;
-      setTimeout(() => {
-         this.$store.dispatch("pageScroll", 1);
-      }, 1500);
-     
+        this.friction = 0.5;
       }
     }
-   }
+  }
 };
 </script>
 

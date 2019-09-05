@@ -6,6 +6,7 @@
 </template>
 
 <script>
+
 import pageFooter from './components/pageFooter'
 export default {
   components: {
@@ -16,13 +17,14 @@ export default {
       
     }
   },
-  created() {
+  mounted() {
      
      
   },
   computed: {
-    
-  }
+  
+  },
+
 }
 </script>
 

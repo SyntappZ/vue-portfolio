@@ -4,6 +4,7 @@
     <background class="home" />
     <about class="about"/>
     <projects class="projects" />
+    
   </div>
 </template>
 
@@ -13,10 +14,12 @@ import about from "@/components/About";
 import projects from "@/components/Projects";
 import background from "@/components/Background";
 import navbar from "@/components/Navbar";
+
 import { mapState } from 'vuex';
 import jump from "jump.js";
 
 export default {
+  
   name: "home",
   components: {
     background,
@@ -24,15 +27,16 @@ export default {
     about,
     navbar,
     
+    
   },
   data() {
     return {
-    
+      
     }
   },
   mounted() {
   let aboutPage = document.querySelector('.about')
-  
+  this.$store.dispatch('pageChanged', 'homePage') 
  
   },
   methods: {
@@ -51,6 +55,7 @@ export default {
     },
   
    watch: {
+  
     page(newValue, oldValue) {
       if(newValue == 0) {
       this.scroll('.home')

@@ -4,13 +4,15 @@
       <p class="link" @click="page(0)">Home</p>
       <p class="link" :class="about" @click="page(1)">About</p>
       <p class="link" :class="projects" @click="page(2)">Projects</p>
-      <p class="link" :class="contact" @click="page(3)">Contact</p>
+      <p class="link" :class="contact">Contact</p>
     </div>
     <h3 :class="projects">Syntappz</h3>
   </div>
 </template>
 
 <script>
+import { setTimeout } from 'timers';
+
 export default {
   name: "navbar",
   data() {
@@ -19,25 +21,30 @@ export default {
       about: "",
       projects: "",
       contact: "",
-      pageOn: this.$route.name,
+     
+     
+     
     };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.scrollListener)
+  },
+  beforeDestroy() {
+   window.removeEventListener("scroll", this.scrollListener)
   },
   methods: {
     page(page) {
       this.$store.dispatch("pageScroll", page);
-    }
-  },
-  mounted() {
-    
-    setTimeout(() => {
+    },
+    scrollListener() {
+      setTimeout(() => {
+              
       let nav, links, glow;
       let aboutPage = this.$store.state.aboutPageHeight;
       let projectsPage = this.$store.state.projectsPageHeight;
      
-      
-      window.addEventListener("scroll", () => {
-       
-        if (scrollY >= aboutPage) {
+     
+           if (scrollY >= aboutPage) {
           this.notHome = true;
           nav = document.querySelector(".navbar");
           links = document.querySelectorAll(".link");
@@ -47,6 +54,7 @@ export default {
         }
 
         if (scrollY >= aboutPage && scrollY < projectsPage) {
+        
           this.about = "thick";
           this.projects = "";
           nav.style.background = "#fff";
@@ -62,14 +70,13 @@ export default {
 
           links.forEach(x => (x.style.color = "#fff"));
         }
-      });
-    }, 100);
-  },
-  watch: {
-    pageOn(newVal, oldVal) {
-      console.log(newVal)
+      }, 10);
+   
+    
     }
-  }
+  },
+
+ 
 };
 </script>
 

@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     gravityOn: false,
     page: 0,
+    currentPageOn: 'homePage',
     aboutPageHeight: "",
     projectsPageHeight: "",
     projectInfo: sessionStorage.getItem('info')
@@ -18,8 +19,9 @@ export default new Vuex.Store({
  
   },
   mutations: {
-    changeGravity(state, gravity) {
-      state.gravityOn = gravity;
+    changeGravity(state) {
+      state.gravityOn = true
+     
     },
     choosePage(state, page) {
       state.page = page;
@@ -30,10 +32,14 @@ export default new Vuex.Store({
     projectsPage(state, height) {
       state.projectsPageHeight = height;
     },
+    pageChanged(state, page) {
+      state.currentPageOn = page
+      
+    },
     getProjectData(state, data) {
       let id = data[0];
       let type = data[1];
-
+     
       let projects = [
         {
           type: type,
@@ -115,7 +121,8 @@ export default new Vuex.Store({
           title: "The vault",
           about: "the vault is a password manager made with vue and vuetify it can store passwords or notes, you can add,\
            delete, edit and favorite passwords and notes, the password manager has a strength indicator and a generator so you can always\
-            have a stong password stored you can filter between strengths or favorites, the notes has a word counter and a favorites filter too.",
+            have a stong password stored you can filter between strengths or favorites, the notes has a word counter and a favorites filter too." ,
+            testing: "TESTING LOGIN - email: test@test.com - password: Test1234",
           making:
             "making this project took longer than expected due to learning vue, vuetify and firebase all at once. i learnt a lot making this project \
             and was very fun to make, i feel i have i nice grasp on vue now and will definitely be alble to build my next projects faster, i resently \
@@ -162,7 +169,7 @@ export default new Vuex.Store({
             'search images',
             'related tag images',
             'tag search',
-            'share to all mobile social apps',
+            'share to all social media',
             'add to favorites'
           ],
           techUsed: [
@@ -233,7 +240,7 @@ export default new Vuex.Store({
   },
   actions: {
     gravity({ commit }) {
-      commit("changeGravity", true);
+      commit("changeGravity");
     },
     pageScroll({ commit }, page) {
       commit("choosePage", page);
@@ -246,6 +253,12 @@ export default new Vuex.Store({
     },
     projectData({ commit }, data) {
       commit("getProjectData", data);
+    },
+    pageChanged({ commit }, page) {
+      commit('pageChanged', page)
     }
+  },
+  getters: {
+
   }
 });
