@@ -46,7 +46,7 @@ body {
 }
 
 .btn {
-  margin: 100px auto;
+  
   font-family: "Roboto Mono", monospace;
   padding: 15px;
   animation-delay: .5s;

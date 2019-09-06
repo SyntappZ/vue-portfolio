@@ -22,7 +22,9 @@ export default {
   components: {},
   data() {
     return {
-      onWelcome: true
+      onWelcome: true,
+      welcomeText: "",
+      pageBottom: this.$store.state.aboutPageHeight
     };
   },
   mounted() {
@@ -33,19 +35,26 @@ export default {
   },
   methods: {
     scrollDown() {
+      this.welcomeText = document.querySelector(".welcome-text");
       this.$store.dispatch("gravity");
-      const element = document.querySelector(".welcome-text");
-      element.classList.add("animated", "hinge");
-        setTimeout(() => {
-         this.$store.dispatch("pageScroll", 1);
+      this.welcomeText.classList.add("animated", "hinge");
+      this.welcomeText.addEventListener("animationend", this.removeAnimation);
+    },
+    removeAnimation() {
+      this.$store.dispatch("pageScroll", 2);
+      setTimeout(() => {
+        this.welcomeText.classList.remove("animated", "hinge");
+        this.welcomeText.removeEventListener(
+          "animationend",
+          this.removeAnimation
+        );
       }, 1500);
     },
     scrollListener() {
-      if (scrollY < 800) {
+      if (scrollY >= this.pageBottom) {
+        
         this.onWelcome = true;
-      } else {
-        this.onWelcome = false;
-      }
+      } 
     }
   }
 };
@@ -89,6 +98,9 @@ h3 {
 i {
   transition: 0.2s;
   padding-left: 5px;
+}
+.btn {
+  margin: 100px auto;
 }
 .btn:hover i {
   transform: rotate(90deg);

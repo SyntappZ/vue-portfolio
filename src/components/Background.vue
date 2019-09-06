@@ -25,6 +25,7 @@ export default {
     };
   },
   mounted() {
+    
     let vm = this;
     let canvas = vm.canvas,
       c = vm.context;

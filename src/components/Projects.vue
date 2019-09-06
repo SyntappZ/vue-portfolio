@@ -1,13 +1,18 @@
 <template>
   <div class="projects" name="projects">
-    <h1 v-if="onProjects" class="animated flipInX">{{ title }}</h1>
-    <div class="project-wrap" v-if="onProjects">
+  
+   
+    <div class="project-wrap animated fadeIn" v-if="onProjects">
+        
+       <h1 v-if="onProjects" class=" animated bounceInRight">{{ title }}</h1>
+     <div class="project-line animated bounceInLeft"  v-if="onProjects"></div>
+    
       <div class="project"  v-for="project in projects" :key="project.id">
-        <div class="img-wrap animated fadeInLeft" :class="project.delay">
+        <div class="img-wrap animated bounceInLeft" :class="project.delay">
            <img :src="project.img" alt="woi" />
         </div>
        
-        <div class="info animated fadeInRight" :class="project.delay">
+        <div class="info animated bounceInRight" :class="project.delay">
           <div class="text-wrap">
             <h2 class="title">{{ project.title }}</h2>
 
@@ -37,7 +42,7 @@ export default {
       title: "Projects",
       hoverOn: false,
       pageTop: 0,
-       onProjects: false,
+      onProjects: false,
       projects: [
         {
           id: 0,
@@ -84,6 +89,7 @@ export default {
     };
   },
   mounted() {
+    
    this.pageTop = document.querySelector(".projects").offsetTop;
    this.$store.dispatch("projectsPageHeight", this.pageTop);
     window.addEventListener("scroll", this.scrollListener)
@@ -99,12 +105,11 @@ export default {
       this.$router.push('/project')
     },
     scrollListener() {
-       
-        let aboutPage = this.$store.state.aboutPageHeight;
+      let aboutPage = this.$store.state.aboutPageHeight;
          
       if (scrollY >= aboutPage) {
        this.pageTop = document.querySelector(".projects").offsetTop;
-        this.$store.dispatch("projectsPageHeight", this.pageTop);
+       this.$store.dispatch("projectsPageHeight", this.pageTop);
       }
       if(scrollY >= this.pageTop) {
         this.onProjects = true;
@@ -120,14 +125,22 @@ export default {
 <style scoped>
 .projects {
   min-height: 100vh;
-  padding: 80px 0;
+  padding: 110px 0 10px 0;
   box-sizing: border-box;
-  background: #003849;
+  background: #00495f;
   color: #333;
+ 
 }
 .project-wrap {
   width: 70%;
-  margin: 100px auto;
+  margin: 50px auto;
+  padding:30px;
+  border:solid #00b7a1 1px;
+   background: #003849;
+  border-radius: 7px;
+  
+   
+  
 }
 h2 {
   text-align:center;
@@ -137,9 +150,8 @@ h2 {
   width: 100%;
   display:flex;
   margin:20px auto;
-  height:300px;
-  
- transition: .3s ease;
+  min-height:300px;
+  transition: .3s ease;
 }
 
 
@@ -149,17 +161,18 @@ h2 {
   display:flex;
   justify-content: center;
   align-items: center;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
  
 }
 
 
-h1 {
+ h1 {
   font-weight: 600;
   font-size: 50px;
   color: #fff;
   padding: 0;
+  margin:10px;
 }
 .img-wrap {
   width:50%;
@@ -169,10 +182,18 @@ img {
   object-fit: cover;
   width: 100%;
   height: 300px;
-   border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
   transition: .3s ease;
- 
+  display:block;
+}
+.project-line {
+  width: 320px;
+  height: 5px;
+  
+  background-color: #00b7a1;
+  border-radius: 5px;
+  margin:10px auto 50px;
 }
 
 
@@ -211,10 +232,45 @@ img {
 }
 @media (max-width: 1024px) {
   .project-wrap {
-    width: 100%;
+    width:95%;
+   
+  }
+  
+  
+  .info {
+    width:100%;
+   border-radius: 0;
+  }
+  .img-wrap {
+    width:100%;
+    
+  }
+  img {
+   border-radius: 0;
+   
   }
   .project {
-    width: 100%;
+     flex-wrap:wrap;
+     margin-bottom:50px;
+     
+     
+  }
+  @media (max-width: 600px) {
+    h1 {
+    font-size:30px;
+  }
+  h2 {
+    font-size:18px;
+  }
+  p {
+    font-size:14px;
+  }
+  img {
+    height:200px;
+  }
+  .project-line {
+    width:55%;
+  }
   }
 }
 </style>

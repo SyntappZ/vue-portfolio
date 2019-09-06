@@ -1,21 +1,22 @@
 <template>
   <div class="about">
-    <div v-if="model" class="model animated fadeInDown">
-      <div @click="closeModel" class="close">
-        <i class="fas fa-times"></i>
-      </div>
-      <h3>About me</h3>
-
-      <p>
-        Hi im Martyn, i am a web developer and i got into coding in 2018.
-        I have been using the framework Vue for the last few months and im
-        really loving it, i cant wait to try react.
-        I've had many different jobs in the past but i feel now is the time for me
-        start my journey as a real web developer.
-      </p>
-    </div>
     <div v-if="onAbout" class="wrap">
-      <div class="text">
+      <div class="text animated fadeInRight">
+        <div v-if="model" class="model animated fadeIn">
+          <div @click="closeModel" class="close">
+            <i class="fas fa-times"></i>
+          </div>
+          <h3>About me</h3>
+
+          <p>
+            Hi im Martyn, i am a web developer and i got into coding in 2018.
+            I have been using the framework Vue for the last few months and im
+            really loving it, i cant wait to try react.
+            I've had many different jobs in the past but i feel now is the time for me
+            start my journey as a real web developer.
+          </p>
+        </div>
+
         <h1 class="animated fadeInLeft ease">About Me</h1>
         <div ref="line" class="line"></div>
         <h2 class="animated fadeInLeft ease">I am a self taught web developer</h2>
@@ -35,6 +36,11 @@
           <h4 class="animated fadeIn" :class="icon.delay">{{ icon.title }}</h4>
           <p class="animated fadeIn" :class="icon.delay">{{ icon.text }}</p>
         </div>
+      </div>
+      <div @click="goToProjects" class="project-btn animated zoomIn">
+        <h3>projects</h3>
+
+        <i class="arrow fas fa-arrow-down animated flash infinite"></i>
       </div>
     </div>
   </div>
@@ -77,44 +83,42 @@ export default {
     };
   },
   mounted() {
-   this.pageTop = document.querySelector(".about").offsetTop;
+    this.pageTop = document.querySelector(".about").offsetTop;
     this.$store.dispatch("aboutPageHeight", this.pageTop);
-    window.addEventListener("scroll", this.scrollListener)
-   
+    window.addEventListener("scroll", this.scrollListener);
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.scrollListener)
+    window.removeEventListener("scroll", this.scrollListener);
   },
-  
 
   methods: {
     openModel() {
       this.model = true;
     },
     scrollListener() {
-       
-      
       if (scrollY >= this.pageTop) {
         this.onAbout = true;
         setTimeout(() => {
           if (window.innerWidth < 600) {
-            this.$refs.line.style.width = 100 + "%";
+            this.$refs.line.style.width = 55 + "%";
           } else {
             this.$refs.line.style.width = 350 + "px";
           }
         }, 200);
       }
-   
     },
     closeModel() {
       const close = document.querySelector(".model");
-      close.classList.remove("fadeInDown");
-      close.classList.add("animated", "fadeOutUp");
+      close.classList.remove("fadeIn");
+      close.classList.add("animated", "fadeOut");
       setTimeout(() => {
-        close.classList.remove("fadeOutUp");
-        close.classList.add("animated", "fadeInDown");
+        close.classList.remove("fadeOut");
+        close.classList.add("animated", "fadeIn");
         this.model = false;
       }, 500);
+    },
+    goToProjects() {
+      this.$store.dispatch("pageScroll", 3);
     }
   }
 };
@@ -137,7 +141,7 @@ export default {
   border-radius: 5px;
   transition: 0.8s ease;
   margin: auto;
-  transition-delay: 1s;
+  transition-delay: 1.2s;
 }
 
 .wrap {
@@ -146,38 +150,13 @@ export default {
   min-height: 700px;
 }
 
-.model {
-  width: 50%;
-  height: 300px;
-  background-color: #fff;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  border: solid #333 1px;
-  border-radius: 5px;
-  z-index: 11;
-  animation-duration: 0.7s;
-  padding: 40px;
-  box-sizing: border-box;
-}
 
-.model p {
-  color: rgb(100, 100, 100);
-  letter-spacing: 0.2px;
-}
-.model h3 {
-  color: #00b7a1;
-  text-transform: uppercase;
-}
 .close {
   position: absolute;
   width: 30px;
   height: 30px;
   line-height: 30px;
-
+  color: #fff;
   border-radius: 50%;
   margin: 5px;
   top: 0;
@@ -185,18 +164,52 @@ export default {
   font-size: 20px;
   cursor: pointer;
 }
+.text {
+  position: relative;
+  border: solid 1px #333;
+  background-color: #003849;
+  color: #fff;
+  width: 50%;
+  margin: auto;
+  padding: 20px;
+  outline: solid #00b7a1 1px;
+  outline-offset: -15px;
+}
 .text h1 {
   font-weight: 600;
   font-size: 60px;
 
   margin: 20px 0 0 0;
-  animation-delay: 0.2s;
+  animation-delay: 0.4s;
 }
 .text h2 {
   letter-spacing: 1px;
   padding: 20px 0;
-  animation-delay: 0.4s;
+  animation-delay: 0.6s;
   font-size: 18px;
+}
+.model {
+  width: 100%;
+  height:100%;
+  background-color: #003849;
+  position: absolute;
+  left:0;
+  top:0;
+  z-index: 11;
+  animation-duration: 0.7s;
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+.model p {
+  color: #fff;
+  letter-spacing: 0.2px;
+  line-height: 30px;
+  padding-top:40px;
+}
+.model h3 {
+  color: #00b7a1;
+  text-transform: uppercase;
 }
 .box {
   width: 80%;
@@ -205,21 +218,19 @@ export default {
   justify-content: space-around;
   align-content: space-around;
   flex-wrap: wrap;
-  margin: 100px auto 0 auto;
+  margin: 70px auto 0 auto;
 }
 
 .btn {
-  border: solid 2px #333;
-  margin: 60px auto;
-  animation-delay: 1.5s;
-  background-color: #00b7a1;
+  margin: 40px auto;
+  animation-delay: 1.2s;
+  background-color: transparent;
   color: #fff;
-  border: #fff solid 2px;
+  border: solid 2px #00b7a1;
 }
 .btn:hover {
-  background-color: #fff;
-  color: #00b7a1;
-  border: #00b7a1 solid 2px;
+  background-color: #00b7a1;
+  color: #fff;
 }
 .delay1 {
   animation-delay: 1.2s;
@@ -270,6 +281,34 @@ h3 {
   font-size: 40px;
   color: #fff;
 }
+.project-btn {
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  color: #003849;
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  top: 250px;
+  right: 100px;
+  cursor: pointer;
+  padding: 25px;
+  animation-delay: 2.2s;
+}
+
+.project-btn h3 {
+  margin: 20px 0 0 0;
+  font-size: 14px;
+}
+.arrow {
+  color: #00b7a1;
+  animation-duration: 5s;
+  font-size: 25px;
+  padding-top: 7px;
+}
 @media (max-width: 1024px) {
   .model {
     width: 100%;
@@ -278,17 +317,36 @@ h3 {
     top: 1px;
   }
 }
+@media (max-width: 600px) {
+  .text h1 {
+    font-size: 30px;
+    margin: 20px 0 10px 0;
+  }
+  .text h2 {
+    font-size: 16px;
+  }
+  .box {
+    margin-bottom: 100px;
+  }
+  .skill-box {
+    margin: 30px 0;
+  }
+  .btn {
+    margin: 0;
+  }
+}
 @media (min-height: 800px) {
- .btn {
-    margin: 100px auto;
-    
- }
- .box {
-   margin: 150px auto 0 auto;
- }
- .wrap {
-   margin-top:100px;
- }
-  
+  .btn {
+    margin: 50px auto;
+  }
+  .box {
+    margin: 100px auto 0 auto;
+  }
+  .wrap {
+    margin-top: 100px;
+  }
+  .project-btn {
+    right:200px;
+  }
 }
 </style>

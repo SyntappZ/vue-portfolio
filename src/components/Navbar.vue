@@ -1,9 +1,9 @@
 <template>
   <div v-if="notHome" class="navbar animated fadeInDown">
     <div class="wrap">
-      <p class="link" @click="page(0)">Home</p>
-      <p class="link" :class="about" @click="page(1)">About</p>
-      <p class="link" :class="projects" @click="page(2)">Projects</p>
+      <p class="link" @click="page(1)">Home</p>
+      <p class="link" :class="about" @click="page(2)">About</p>
+      <p class="link" :class="projects" @click="page(3)">Projects</p>
       <p class="link" :class="contact">Contact</p>
     </div>
     <h3 :class="projects">Syntappz</h3>
@@ -59,15 +59,16 @@ export default {
           this.projects = "";
           nav.style.background = "#fff";
           nav.style.color = "#003849";
+          nav.style.borderBottom = 'solid 1px #000'
           links.forEach(x => (x.style.color = "#003849"));
           projectsPage = this.$store.state.projectsPageHeight;
         }
         if (scrollY >= projectsPage) {
           this.about = "";
           this.projects = "thick";
-          nav.style.background = "#003849";
+          nav.style.background = "#00495f";
           nav.style.color = "#fff";
-
+          nav.style.borderBottom = 'solid 1px #00b7a1'
           links.forEach(x => (x.style.color = "#fff"));
         }
       }, 10);
@@ -93,7 +94,10 @@ export default {
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap-reverse;
-  transition: 0.3s ease-in-out;
+  transition: 0.3s ease;
+ 
+  
+ 
 }
 .wrap {
   display: flex;

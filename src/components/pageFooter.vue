@@ -26,8 +26,8 @@
       </div>
     </div>
   
-    <div class="auth">
-      <p>SyntappZ &copy; 2019</p>
+    <div class="auth" :class="pageOn">
+      <p>Syntappz&copy; 2019</p>
     </div>
   </div>
 </template>
@@ -66,18 +66,23 @@ export default {
   letter-spacing: 1px;
  
 }
-.homePage {
-   border-top: solid #00b7a1 1px;
-  
-}
+
 .auth {
   position: relative;
   bottom: 0;
   width: 100%;
-  padding:5px 0;
+  padding:18px 0;
   text-align: center;
-  color:#000;
+  color:#fff;
   background: #00b7a1;
+}
+.auth p {
+  padding:0;
+  margin:0;
+}
+.homePage {
+   border-top: solid #00b7a1 1px;
+   color:#000;
 }
 .wrap {
   display:flex;
@@ -91,7 +96,7 @@ export default {
   justify-content: space-around;
 }
 .icon {
-  
+  border:#015e53 1px solid;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -105,6 +110,8 @@ export default {
 .icon:hover {
   background-color: #01495f;
   transform: scale(0.9);
+  border:#00b7a1 1px solid;
+ 
 }
 .icon a {
   color: #00b7a1;
@@ -129,6 +136,7 @@ export default {
   .link {
     padding: 0 20px;
   }
+  
 }
 @media (min-height: 800px) {
  .icon-wrap {
