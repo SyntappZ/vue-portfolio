@@ -224,7 +224,7 @@ img {
 .delay5 {
   animation-delay: 1.2s;
 }
-@media (min-height: 800px) {
+@media (min-height: 800px) and (min-width: 1024px) {
   .project-wrap {
     width: 60%;
   }
@@ -233,7 +233,8 @@ img {
 @media (max-width: 1024px) {
   .project-wrap {
     width:95%;
-   
+    
+    box-sizing: border-box;
   }
   
   
@@ -247,13 +248,11 @@ img {
   }
   img {
    border-radius: 0;
-   
+   height:350px;
   }
   .project {
      flex-wrap:wrap;
      margin-bottom:50px;
-     
-     
   }
   @media (max-width: 600px) {
     h1 {
@@ -271,6 +270,14 @@ img {
   .project-line {
     width:55%;
   }
+   .project-wrap {
+     margin:0;
+    width:100%;
+    border:none;
+    padding:0;
+    background-color:#00495f;
+  }
+  
   }
 }
 </style>

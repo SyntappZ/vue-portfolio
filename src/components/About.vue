@@ -195,7 +195,7 @@ export default {
   position: absolute;
   left:0;
   top:0;
-  z-index: 11;
+  z-index: 1;
   animation-duration: 0.7s;
   padding: 40px;
   box-sizing: border-box;
@@ -310,32 +310,62 @@ h3 {
   padding-top: 7px;
 }
 @media (max-width: 1024px) {
-  .model {
-    width: 100%;
-    height: auto;
-    border: none;
-    top: 1px;
+   .wrap {
+    margin-top: 100px;
+  }
+ 
+  .text {
+    width: 90%;
+  }
+   .project-btn {
+    display:none;
+  }
+   .btn {
+    margin: 50px auto;
+  }
+  .box {
+    margin: 70px auto;
+   
   }
 }
 @media (max-width: 600px) {
+    .wrap {
+      width:100%;
+    }
   .text h1 {
     font-size: 30px;
     margin: 20px 0 10px 0;
   }
   .text h2 {
-    font-size: 16px;
+    font-size: 14px;
   }
   .box {
+    position: relative;
     margin-bottom: 100px;
+    z-index: -1;
   }
   .skill-box {
     margin: 30px 0;
   }
   .btn {
-    margin: 0;
+   color:#00b7a1;
   }
+  .text {
+    width: 100%;
+    padding:0;
+    margin:0;
+    outline:none;
+    background: white;
+    color:#333;
+    border:none;
+  }
+  .model {
+    height:auto;
+    z-index: 100;
+  } 
+
 }
-@media (min-height: 800px) {
+@media (min-height: 800px) and (min-width: 1024px) {
   .btn {
     margin: 50px auto;
   }

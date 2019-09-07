@@ -138,7 +138,7 @@ export default {
   }
   
 }
-@media (min-height: 800px) {
+@media (min-height: 800px) and (min-width: 1024px) {
  .icon-wrap {
    width:700px;
  }

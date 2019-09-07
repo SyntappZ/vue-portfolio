@@ -16,10 +16,7 @@ export default {
   
   },
   created() {
-    window.addEventListener("scroll", () => {
- 
-      
-    });
+   
   }
 };
 </script>

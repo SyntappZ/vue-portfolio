@@ -243,8 +243,8 @@ export default {
 <style scoped>
 .project {
   width: 90%;
-  margin: auto;
-  min-height: 1000px;
+  margin: 0 auto;
+  
 }
 a {
   text-decoration: none;
@@ -256,17 +256,23 @@ a {
   top: 50px;
   transition: 0.2s;
   cursor: pointer;
+  z-index: 2;
 }
 .backBtn:hover {
   color: #dddddd;
 }
 .name {
+  position: absolute;
   color: #fff;
   font-family: "Audiowide", cursive;
   font-weight: 100;
   font-size: 20px;
-  margin-top: 20px;
+  padding-top: 20px;
   text-shadow: 0 0 5px #fff;
+  top:0;
+  left:0;
+  right:0;
+ z-index: 1;
 }
 .bg {
   position: absolute;
@@ -279,12 +285,12 @@ a {
 }
 .top-flex {
   width: 100%;
-  min-height: 500px;
-  margin-top: 100px;
+  height: 45vh;
+  margin: 30vh auto 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  
 }
 
 .main-img-wrap {
@@ -302,6 +308,7 @@ a {
   letter-spacing: 2px;
   padding:10px 0;
   border-bottom: solid 2px #00b7a1;
+ 
 }
 
 .img-box {
@@ -369,6 +376,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   align-items: left;
   outline: solid #00b7a1 1px;
   outline-offset: -15px;
@@ -418,6 +426,7 @@ a {
 .links-wrap {
   width: 100%;
   display: flex;
+  flex-wrap:wrap;
   justify-content: space-between;
   align-items: center;
   margin: 0 auto 70px auto;
@@ -449,19 +458,19 @@ hr {
 }
 
 
-@media (max-width: 1024px) {
-  .img {
-    width: 100%;
-  }
-}
 
-@media (min-height: 800px) {
+@media (min-height: 800px) and (min-width: 1024px) {
   .bottom-flex {
     margin-top: 100px;
     align-content: space-around;
   }
+  .main-img-wrap {
+  width: 1100px;
+  animation-delay: 0.4s;
+}
   .links {
-    width: 700px;
+    display:flex;
+    flex-wrap:wrap;
   }
   .img {
     height: 300px;
@@ -469,9 +478,114 @@ hr {
   .img img {
     height: 300px;
   }
-  .main-img-wrap,
   .left-box {
-    width: 1200px;
+    width:1100px;
+  }
+  
+  .right {
+    width:350px;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  .main-img-wrap {
+    width:100%;
+   
+  }
+  .top-flex {
+    justify-content: space-around;
+    height: 45vh;
+   margin: 15vh auto 0 auto;
+    flex-direction: column;
+  }
+  
+  hr {
+    margin:40px 0;
+  }
+   
+  .img {
+    width: 100%;
+    margin:50px 0;
+  }
+
+  .img-box {
+    margin:0;
+  }
+  .right {
+    width:100%;
+    
+  }
+  .left-box {
+    width:100%;
+  }
+  .right-box {
+    width:100%;
+    flex-direction: row;
+    height:auto;
+    margin-bottom:100px;
+    box-sizing: border-box;
+  }
+  .links {
+   width:60%;
+  }
+  .toTop {
+    margin:auto;
+    right: 0;
+    left: 0;
+    bottom:15px;
+    
+  }
+  
+}
+
+@media (max-width: 600px) {
+ .backBtn {
+   top:20px;
+ }
+   .top-flex {
+    
+   
+  }
+  
+  .img-box {
+    margin:0 0 60px 0;
+  }
+  .img  {
+    margin:10px 0;
+  }
+  .title {
+    font-size:16px;
+    width:100%;
+  }
+  .left-box h2 {
+    text-align: center;
+    font-size: 20px;
+  }
+  .left-box p {
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+  
+   .links {
+   width:100%;
+   height:150px;
+   flex-wrap:wrap;
+   justify-content: center;
+   align-content: space-around;
+  }
+  .links-wrap {
+     justify-content: center;
+  }
+  .right-box {
+    width:100%;
+    flex-direction: column;
+   
+  }
+  .right-box h2 {
+    text-align: center;
+  }.right-box li {
+    padding-left:25px;
   }
 }
 </style>

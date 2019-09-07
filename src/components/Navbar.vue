@@ -93,7 +93,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  flex-wrap: wrap-reverse;
+
   transition: 0.3s ease;
  
   
@@ -120,8 +120,8 @@ h3 {
   letter-spacing: 2px;
 }
 @media (max-width: 600px) {
-  .wrap {
-    direction: row-reverse;
+  h3 {
+   display:none;
   }
   .link {
     padding: 0 5px;
