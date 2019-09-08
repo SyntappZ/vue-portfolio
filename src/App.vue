@@ -14,12 +14,18 @@ export default {
   },
   data() {
     return {
+      imageArray: [
+        "woi/woi-home.png",
+         "woi/woi-main.png", 
+         "woi/woi-contact.png"
+      ]
+
       
     }
   },
   mounted() {
-     
-     
+    
+   
   },
   computed: {
   
