@@ -1,5 +1,6 @@
-<template>
-  <div>
+<template >
+  <div >
+    <div class="top"></div>
     <div class="project">
       <div class="backBtn animated fadeInLeft" @click="backToProjects">
         <i class="fas fa-arrow-circle-left"></i>
@@ -231,7 +232,7 @@ export default {
       this.$router.go(-1);
     },
     toTop() {
-        jump('.project', { duration: 700 });
+        jump('.top', { duration: 700 });
     }
   },
   computed: {
@@ -455,6 +456,10 @@ hr {
 }
 .btn:hover {
   background: #01556e;
+}
+.top {
+  position: absolute;
+  top:0;
 }
 
 

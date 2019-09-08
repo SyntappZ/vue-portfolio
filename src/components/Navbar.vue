@@ -27,6 +27,7 @@ export default {
     };
   },
   mounted() {
+    
     window.addEventListener("scroll", this.scrollListener)
   },
   beforeDestroy() {
@@ -64,7 +65,8 @@ export default {
           projectsPage = this.$store.state.projectsPageHeight;
         }
         if (scrollY >= projectsPage) {
-          this.about = "";
+          console.log('scroll is past projects')
+           this.about = "";
           this.projects = "thick";
           nav.style.background = "#00495f";
           nav.style.color = "#fff";
@@ -74,6 +76,9 @@ export default {
       }, 10);
    
     
+    },
+    changeNavBlue() {
+      
     }
   },
 

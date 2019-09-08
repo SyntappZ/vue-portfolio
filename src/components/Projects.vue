@@ -2,21 +2,22 @@
   <div class="projects" name="projects">
   
    
-    <div class="project-wrap animated fadeIn" v-if="onProjects">
+    <div class="project-wrap animated fadeIn" v-if="onTitle">
         
-       <h1 v-if="onProjects" class=" animated bounceInRight">{{ title }}</h1>
-     <div class="project-line animated bounceInLeft"  v-if="onProjects"></div>
-    
-      <div class="project"  v-for="project in projects" :key="project.id">
-        <div class="img-wrap animated bounceInLeft" :class="project.delay">
+       <h1 v-if="onTitle" class=" animated bounceInRight">{{ title }}</h1>
+     <div class="project-line animated bounceInLeft"  ></div>
+
+  
+      <div  class="project"  v-for="project in projects" :key="project.id">
+        <div v-if="project.scrollOnProject" class="img-wrap animated fadeInLeft" >
            <img :src="project.img" alt="woi" />
         </div>
        
-        <div class="info animated bounceInRight" :class="project.delay">
+        <div v-if="project.scrollOnProject"  class="info animated fadeInRight" >
           <div class="text-wrap">
             <h2 class="title">{{ project.title }}</h2>
 
-            <div class="animated">
+            <div>
                <p>{{ project.subtext }}</p>
             <div class="more-btn"
             @click="sendProjectData(project.id, project.type)"
@@ -29,6 +30,8 @@
           </div>
         </div>
       </div>
+
+      
     
     </div>
   </div>
@@ -43,6 +46,7 @@ export default {
       hoverOn: false,
       pageTop: 0,
       onProjects: false,
+      onTitle: false,
       projects: [
         {
           id: 0,
@@ -50,7 +54,8 @@ export default {
           title: 'world of information',
           subtext: 'Vue - Wiki/Imgur API',
           img: 'woi/woi-home.png',
-          delay: 'delay1'
+          
+          scrollOnProject: false
         },
       
           {
@@ -59,7 +64,8 @@ export default {
           title: 'angels & demons',
           subtext: 'Vue - Wiki API',
           img: 'a-n-d/a&d-main.png',
-          delay: 'delay2'
+          
+          scrollOnProject: false
         },
             {
           id: 2,
@@ -67,7 +73,8 @@ export default {
           title: 'the vault',
           subtext: 'Vue/Vuetify - Firebase',
           img: 'vault/vault-home.png',
-          delay: 'delay3'
+          
+          scrollOnProject: false
         },
           {
           id: 3,
@@ -75,7 +82,8 @@ export default {
           title: 'memester',
           subtext: 'cordova/framework7',
           img: 'memester/memester-main.jpg',
-          delay: 'delay4'
+          
+          scrollOnProject: false
         },
           {
           id: 4,
@@ -83,7 +91,8 @@ export default {
           title: 'fusion ninja',
           subtext: 'cordova/framework7',
           img: 'fusion/fusion-main.png',
-          delay: 'delay5'
+         
+          scrollOnProject: false
         }
       ]
     };
@@ -111,10 +120,28 @@ export default {
        this.pageTop = document.querySelector(".projects").offsetTop;
        this.$store.dispatch("projectsPageHeight", this.pageTop);
       }
-      if(scrollY >= this.pageTop) {
-        this.onProjects = true;
+       
+      if(scrollY >= this.pageTop - 489) {
+        
+        this.onTitle = true;
       }
-    
+       if(scrollY >= this.pageTop - 430) {
+        this.projects[0].scrollOnProject = true;
+      }
+       if(scrollY >= this.pageTop - 100) {
+       this.projects[1].scrollOnProject = true;
+      }
+       if(scrollY >= this.pageTop + 200) {
+        this.projects[2].scrollOnProject = true;
+      }
+       if(scrollY >= this.pageTop + 539) {
+       this.projects[3].scrollOnProject = true;
+      }
+       if(scrollY >= this.pageTop + 800) {
+        this.projects[4].scrollOnProject = true;
+      }
+      
+    console.log()
     }
   },
   computed: {}
@@ -135,8 +162,9 @@ export default {
   width: 70%;
   margin: 50px auto;
   padding:30px;
-  border:solid #00b7a1 1px;
-   background: #003849;
+  border-left:solid #00b7a1 1px;
+  border-right:solid #00b7a1 1px;
+  background: #003849;
   border-radius: 7px;
   
    
@@ -209,21 +237,7 @@ img {
   background: #00b7a1;
 }
 
-.delay1 {
-  animation-delay: .4s;
-}
-.delay2 {
-  animation-delay: .6s;
-}
-.delay3 {
-  animation-delay: .8s;
-}
-.delay4 {
-  animation-delay: 1s;
-}
-.delay5 {
-  animation-delay: 1.2s;
-}
+
 @media (min-height: 800px) and (min-width: 1024px) {
   .project-wrap {
     width: 60%;

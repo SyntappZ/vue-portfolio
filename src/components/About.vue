@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <div v-if="onAbout" class="wrap">
-      <div class="text animated fadeInRight">
+    <div class="wrap">
+      <div v-if="onText" class="text animated fadeInRight">
         <div v-if="model" class="model animated fadeIn">
           <div @click="closeModel" class="close">
             <i class="fas fa-times"></i>
@@ -27,7 +27,7 @@
           </p>
         </div>
       </div>
-      <div class="box">
+      <div v-if="onFullPage" class="box">
         <div v-for="(icon, i) in icons" :key="i" class="skill-box">
           <div class="icon-wrap animated flipInY" :class="icon.delay">
             <i :class="icon.icon"></i>
@@ -37,7 +37,7 @@
           <p class="animated fadeIn" :class="icon.delay">{{ icon.text }}</p>
         </div>
       </div>
-      <div @click="goToProjects" class="project-btn animated zoomIn">
+      <div v-if="onFullPage" @click="goToProjects" class="project-btn animated zoomIn">
         <h3>projects</h3>
 
         <i class="arrow fas fa-arrow-down animated flash infinite"></i>
@@ -51,7 +51,8 @@ export default {
   name: "about",
   data() {
     return {
-      onAbout: false,
+      onText: false,
+      onFullPage: false,
       model: false,
       pageTop: 0,
       icons: [
@@ -96,15 +97,19 @@ export default {
       this.model = true;
     },
     scrollListener() {
-      if (scrollY >= this.pageTop) {
-        this.onAbout = true;
-        setTimeout(() => {
+    
+      if (scrollY >= (this.pageTop - 489)) {
+        this.onText = true;
+         setTimeout(() => {
           if (window.innerWidth < 600) {
             this.$refs.line.style.width = 55 + "%";
           } else {
             this.$refs.line.style.width = 350 + "px";
           }
         }, 200);
+      }
+      if(scrollY >= this.pageTop - 100) {
+        this.onFullPage = true
       }
     },
     closeModel() {
@@ -233,16 +238,16 @@ export default {
   color: #fff;
 }
 .delay1 {
-  animation-delay: 1.2s;
+  animation-delay: 0s;
 }
 .delay2 {
-  animation-delay: 1.4s;
+  animation-delay: 0.2s;
 }
 .delay3 {
-  animation-delay: 1.6s;
+  animation-delay: 0.4s;
 }
 .delay4 {
-  animation-delay: 1.8s;
+  animation-delay: 0.6s;
 }
 
 h3 {
@@ -292,11 +297,13 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  top: 250px;
-  right: 100px;
+  top: 420px;
+  right: 0;
+  left:0;
+
   cursor: pointer;
   padding: 25px;
-  animation-delay: 2.2s;
+  animation-delay: 1s;
 }
 
 .project-btn h3 {
@@ -376,7 +383,7 @@ h3 {
     margin-top: 100px;
   }
   .project-btn {
-    right:200px;
+    top:530px;
   }
 }
 </style>
