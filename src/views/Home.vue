@@ -27,49 +27,10 @@ export default {
   data() {
     return {
       offset: 0,
-      imagesForCaching: [
-        "woi/woi-home.png",
-        "woi/woi-main.png",
-        "woi/woi-contact.png",
-        "a-n-d/a&d-main.png",
-        "a-n-d/a&d-angels.png",
-        "a-n-d/a&d-abbadon.png",
-        "vault/vault-home.png",
-        "vault/vault-notes.png",
-        "vault/vault-passwords.png",
-        "memester/home.png",
-        "memester/search.png",
-        "memester/menu.png",
-        "memester/image.png",
-        "memester/tags.png",
-        "fusion/fusion-front.png",
-        "fusion/fusion-tracks.png",
-        "fusion/fusion-info.png",
-        "fusion/fusion-filter.png",
-        "fusion/fusion-levels.png"
-      ]
+    
     };
   },
-  created() {
-    function preloadImages(array) {
-      if (!preloadImages.list) {
-        preloadImages.list = [];
-      }
-      var list = preloadImages.list;
-      for (var i = 0; i < array.length; i++) {
-        var img = new Image();
-        img.onload = function() {
-          var index = list.indexOf(this);
-          if (index !== -1) {
-            list.splice(index, 1);
-          }
-        };
-        list.push(img);
-        img.src = array[i];
-      }
-    }
-    preloadImages(this.imagesForCaching);
-  },
+ 
   mounted() {
     this.$store.dispatch("pageChanged", "homePage");
   },

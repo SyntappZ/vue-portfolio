@@ -11,6 +11,7 @@
     "core-js": "^2.6.5",
     "jump.js": "^1.0.2",
     "vue": "^2.6.10",
+    "vue-image-preloader": "^0.2.8",
     "vue-router": "^3.0.3",
     "vuex": "^3.1.1"
   },

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+   
     <router-view />
     <pageFooter />
   </div>
@@ -18,14 +19,34 @@ export default {
         "woi/woi-home.png",
          "woi/woi-main.png", 
          "woi/woi-contact.png"
+      ],
+        imagesForCaching: [
+        "woi/woi-home.png",
+        "woi/woi-main.png",
+        "woi/woi-contact.png",
+        "a-n-d/a&d-main.png",
+        "a-n-d/a&d-angels.png",
+        "a-n-d/a&d-abbadon.png",
+        "vault/vault-home.png",
+        "vault/vault-notes.png",
+        "vault/vault-passwords.png",
+        "memester/home.png",
+        "memester/search.png",
+        "memester/menu.png",
+        "memester/image.png",
+        "memester/tags.png",
+        "fusion/fusion-front.png",
+        "fusion/fusion-tracks.png",
+        "fusion/fusion-info.png",
+        "fusion/fusion-filter.png",
+        "fusion/fusion-levels.png"
       ]
 
       
     }
   },
-  mounted() {
-    
-   
+  async mounted() {
+    await this.$imagePreload(this.imagesForCaching)
   },
   computed: {
   
