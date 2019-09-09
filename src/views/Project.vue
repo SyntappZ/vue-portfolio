@@ -486,7 +486,7 @@ hr {
 }
 
 .web-model-wrap {
-  width: 90%;
+   width: 70%;
    box-shadow: 10px 10px 100px #333;
 }
 .android-model-wrap {
@@ -506,8 +506,7 @@ hr {
     margin-top: 100px;
     align-content: space-around;
   }
-  /* .main-img-wrap {
-  /* width: 1100px; */
+  
 
   .links {
     display: flex;
