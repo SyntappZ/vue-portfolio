@@ -1,8 +1,8 @@
 <template>
   <div class="projects" name="projects">
     <div class="project-wrap animated fadeIn" v-if="onTitle">
-      <h1 v-if="onTitle" class="animated bounceInRight">{{ title }}</h1>
-      <div class="project-line animated bounceInLeft"></div>
+      <h1 v-if="onTitle" class="animated fadeInRight">{{ title }}</h1>
+      <div class="project-line animated fadeInLeft"></div>
 
       <div class="project" v-for="project in projects" :key="project.id">
         <div v-if="project.scrollOnProject" class="img-wrap animated fadeInLeft">

@@ -8,7 +8,7 @@
             </a>
           </div>
           <div class="icon">
-            <a href="https://www.sololearn.com/Profile/10317918" target="_blank">
+            <a href="https://github.com/SyntappZ/vue-portfolio" target="_blank">
               <i class="fas fa-code"></i>
             </a>
           </div>

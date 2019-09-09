@@ -119,11 +119,12 @@ export default {
       model: false
     };
   },
+
   beforeDestroy() {
-    //  window.removeEventListener("scroll", this.scrollListener);
+   // window.removeEventListener("scroll", this.scrollListener);
   },
   mounted() {
-    //  window.addEventListener("scroll", this.scrollListener);
+   // window.addEventListener("scroll", this.scrollListener);
 
     this.$store.dispatch("pageChanged", "project");
     let pageData = this.$store.state.projectInfo;
@@ -257,9 +258,13 @@ export default {
       if (this.model) {
         let model = document.querySelector(".img-model");
 
-        model.classList.remove("animated", "zoomIn");
+        
         model.classList.add("animated", "zoomOut");
-        this.model = false;
+        setTimeout(() => {
+           this.model = false;
+           model.classList.add("animated", "zoomIn");
+        }, 400);
+       
       }
     }
   },
@@ -482,13 +487,17 @@ hr {
 
 .web-model-wrap {
   width: 90%;
+   box-shadow: 10px 10px 100px #333;
 }
 .android-model-wrap {
   width: 400px;
+   box-shadow: 10px 10px 50px #333;
+ 
 }
 .web-model-wrap img,
 .android-model-wrap img {
   width: 100%;
+  display: block;
   cursor: zoom-out;
 }
 

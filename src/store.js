@@ -42,7 +42,8 @@ export default new Vuex.Store({
         {
           type: type,
           title: "world of information",
-          about: "woi is wiki snippet search application.",
+          about: "woi is a wiki snippet search application where you can search names and it will bring back\
+          10 snippets with an image related to your search name soon i will add a feature to change the snippet amount to the users liking.",
           making:
             "I learnt a good bit about using apis and axios making this project,\
              i had to make quite a few changes to the page from my original plan,\
