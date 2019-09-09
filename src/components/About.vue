@@ -27,6 +27,7 @@
           </p>
         </div>
       </div>
+
       <div v-if="onFullPage" class="box">
         <div v-for="(icon, i) in icons" :key="i" class="skill-box">
           <div class="icon-wrap animated flipInY" :class="icon.delay">
@@ -37,16 +38,12 @@
           <p class="animated fadeIn" :class="icon.delay">{{ icon.text }}</p>
         </div>
       </div>
-      <div v-if="onFullPage" @click="goToProjects" class="project-btn animated zoomIn">
-        <h3>projects</h3>
-
-        <i class="arrow fas fa-arrow-down animated flash infinite"></i>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   name: "about",
   data() {
@@ -54,6 +51,7 @@ export default {
       onText: false,
       onFullPage: false,
       model: false,
+      addTimeout: false,
       pageTop: 0,
       icons: [
         {
@@ -97,19 +95,24 @@ export default {
       this.model = true;
     },
     scrollListener() {
-    
-      if (scrollY >= (this.pageTop - 489)) {
+      if (scrollY >= this.pageTop - 489) {
         this.onText = true;
-         setTimeout(() => {
+        setTimeout(() => {
           if (window.innerWidth < 600) {
             this.$refs.line.style.width = 55 + "%";
           } else {
-            this.$refs.line.style.width = 350 + "px";
+            this.$refs.line.style.width = 300 + "px";
           }
         }, 200);
       }
-      if(scrollY >= this.pageTop - 100) {
-        this.onFullPage = true
+      if (scrollY >= this.pageTop - 100) {
+        if (this.addTimeout) {
+          setTimeout(() => {
+            this.onFullPage = true;
+          }, 1000);
+        } else {
+          this.onFullPage = true;
+        }
       }
     },
     closeModel() {
@@ -124,6 +127,16 @@ export default {
     },
     goToProjects() {
       this.$store.dispatch("pageScroll", 3);
+    }
+  },
+  computed: {
+    ...mapState(["welcomeButtonClicked"])
+  },
+  watch: {
+    welcomeButtonClicked(click) {
+      if (click) {
+        this.addTimeout = true;
+      }
     }
   }
 };
@@ -155,7 +168,6 @@ export default {
   min-height: 700px;
 }
 
-
 .close {
   position: absolute;
   width: 30px;
@@ -171,19 +183,14 @@ export default {
 }
 .text {
   position: relative;
-  border: solid 1px #333;
-  background-color: #003849;
-  color: #fff;
-  width: 50%;
-  margin: auto;
+  border-radius: 5px;
+  color: #333;
+  margin: 50px auto;
   padding: 20px;
-  outline: solid #00b7a1 1px;
-  outline-offset: -15px;
 }
 .text h1 {
   font-weight: 600;
-  font-size: 60px;
-
+  font-size: 50px;
   margin: 20px 0 0 0;
   animation-delay: 0.4s;
 }
@@ -191,15 +198,17 @@ export default {
   letter-spacing: 1px;
   padding: 20px 0;
   animation-delay: 0.6s;
-  font-size: 18px;
+  font-size: 16px;
 }
 .model {
-  width: 100%;
-  height:100%;
+  width: 700px;
+  height: 100%;
   background-color: #003849;
   position: absolute;
-  left:0;
-  top:0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 0;
   z-index: 1;
   animation-duration: 0.7s;
   padding: 40px;
@@ -210,7 +219,7 @@ export default {
   color: #fff;
   letter-spacing: 0.2px;
   line-height: 30px;
-  padding-top:40px;
+  padding-top: 40px;
 }
 .model h3 {
   color: #00b7a1;
@@ -230,7 +239,7 @@ export default {
   margin: 40px auto;
   animation-delay: 1.2s;
   background-color: transparent;
-  color: #fff;
+  color: #00b7a1;
   border: solid 2px #00b7a1;
 }
 .btn:hover {
@@ -286,30 +295,7 @@ h3 {
   font-size: 40px;
   color: #fff;
 }
-.project-btn {
-  width: 70px;
-  height: 70px;
-  margin: auto;
-  color: #003849;
-  position: absolute;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  top: 420px;
-  right: 0;
-  left:0;
 
-  cursor: pointer;
-  padding: 25px;
-  animation-delay: 1s;
-}
-
-.project-btn h3 {
-  margin: 20px 0 0 0;
-  font-size: 14px;
-}
 .arrow {
   color: #00b7a1;
   animation-duration: 5s;
@@ -317,28 +303,27 @@ h3 {
   padding-top: 7px;
 }
 @media (max-width: 1024px) {
-   .wrap {
+  .wrap {
     margin-top: 100px;
   }
- 
+
   .text {
     width: 90%;
   }
-   .project-btn {
-    display:none;
+  .project-btn {
+    display: none;
   }
-   .btn {
+  .btn {
     margin: 50px auto;
   }
   .box {
     margin: 70px auto;
-   
   }
 }
 @media (max-width: 600px) {
-    .wrap {
-      width:100%;
-    }
+  .wrap {
+    width: 100%;
+  }
   .text h1 {
     font-size: 30px;
     margin: 20px 0 10px 0;
@@ -355,22 +340,21 @@ h3 {
     margin: 30px 0;
   }
   .btn {
-   color:#00b7a1;
+    color: #00b7a1;
   }
   .text {
     width: 100%;
-    padding:0;
-    margin:0;
-    outline:none;
+    padding: 0;
+    margin: 0;
+    outline: none;
     background: white;
-    color:#333;
-    border:none;
+    color: #333;
+    border: none;
   }
   .model {
-    height:auto;
+    height: auto;
     z-index: 100;
-  } 
-
+  }
 }
 @media (min-height: 800px) and (min-width: 1024px) {
   .btn {
@@ -383,7 +367,7 @@ h3 {
     margin-top: 100px;
   }
   .project-btn {
-    top:530px;
+    top: 530px;
   }
 }
 </style>

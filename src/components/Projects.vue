@@ -37,7 +37,7 @@ export default {
       pageTop: 0,
       onProjects: false,
       onTitle: false,
-      woi:"woi/woi-home.png",
+      woi: "woi/woi-home.png",
       projects: [
         {
           id: 0,
@@ -84,11 +84,9 @@ export default {
     };
   },
   mounted() {
-   
     this.pageTop = document.querySelector(".projects").offsetTop;
     this.$store.dispatch("projectsPageHeight", this.pageTop);
     window.addEventListener("scroll", this.scrollListener);
-  
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.scrollListener);
@@ -125,8 +123,6 @@ export default {
       if (scrollY >= this.pageTop + 800) {
         this.projects[4].scrollOnProject = true;
       }
-
-      
     }
   },
   computed: {}
@@ -146,8 +142,7 @@ export default {
   width: 70%;
   margin: 50px auto;
   padding: 30px;
-  border-left: solid #00b7a1 1px;
-  border-right: solid #00b7a1 1px;
+  border: solid #00b7a1 1px;
   background: #003849;
   border-radius: 7px;
 }
@@ -257,9 +252,10 @@ img {
       width: 55%;
     }
     .project-wrap {
-      margin: 0;
-      width: 100%;
+      
+      width: 95%;
       border: none;
+      margin:auto;
       padding: 0;
       background-color: #00495f;
     }

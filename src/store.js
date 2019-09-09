@@ -8,6 +8,7 @@ export default new Vuex.Store({
     gravityOn: false,
     page: 0,
     currentPageOn: "homePage",
+    welcomeButtonClicked: false,
     aboutPageHeight: "",
     projectsPageHeight: "",
     projectInfo: sessionStorage.getItem("info")

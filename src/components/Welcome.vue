@@ -35,6 +35,7 @@ export default {
   },
   methods: {
     scrollDown() {
+      this.$store.state.welcomeButtonClicked = true;
       this.welcomeText = document.querySelector(".welcome-text");
       this.$store.dispatch("gravity");
       this.welcomeText.classList.add("animated", "hinge");
@@ -52,9 +53,8 @@ export default {
     },
     scrollListener() {
       if (scrollY >= this.pageBottom) {
-        
         this.onWelcome = true;
-      } 
+      }
     }
   }
 };
