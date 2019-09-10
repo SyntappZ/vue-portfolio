@@ -4,7 +4,7 @@
       <p class="link" @click="page(1)">Home</p>
       <p class="link" :class="about" @click="page(2)">About</p>
       <p class="link" :class="projects" @click="page(3)">Projects</p>
-      <p class="link" :class="contact">Contact</p>
+      
     </div>
     <h3 :class="projects">Syntappz</h3>
   </div>
