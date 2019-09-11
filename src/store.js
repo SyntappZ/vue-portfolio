@@ -178,7 +178,7 @@ export default new Vuex.Store({
           type: type,
           title: "fusion ninja",
           about:
-            "fusion ninjs is an android app for searching user created tracks in a game called trials fusion.",
+            "fusion ninja is an android app for searching user created tracks in a game called trials fusion.",
           making:
             "i made this app for a game called trials fusion, it allows people to search for other peoples ninja tracks so they can play them, \
             there is already a website that does this called https://fusion.ninja-central.com but its not very responsive on mobile and makes it hard to use,\
