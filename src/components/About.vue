@@ -11,7 +11,7 @@
           <p>
             Hi im Martyn, i am a web developer and i got into coding in 2018.
             I have been using the framework Vue for the last few months and im
-            really loving it, i cant wait to try react.
+            really loving it, i cant wait to try Angular & React.
             I've had many different jobs in the past but i feel now is the time for me
             start my journey as a real web developer.
           </p>
