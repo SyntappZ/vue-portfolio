@@ -182,7 +182,7 @@ export default {
   cursor: pointer;
 }
 .text {
-  position: relative;
+ 
   border-radius: 5px;
   color: #333;
   margin: 50px auto;
@@ -319,6 +319,9 @@ h3 {
   .box {
     margin: 70px auto;
   }
+  .model {
+    width:100%;
+  }
 }
 @media (max-width: 600px) {
   .wrap {
@@ -352,6 +355,7 @@ h3 {
     border: none;
   }
   .model {
+    width:100%;
     height: auto;
     z-index: 100;
   }
